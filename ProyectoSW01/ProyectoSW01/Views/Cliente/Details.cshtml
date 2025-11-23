@@ -1,0 +1,128 @@
+﻿@model ProyectoSW01.Models.Cliente
+
+@{
+    ViewData["Title"] = "Detalle del Cliente";
+}
+
+<!-- Tailwind CDN -->
+<script src="https://cdn.tailwindcss.com"></script>
+
+<!-- Material Icons -->
+<link rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:wght@300;400;700&display=swap" />
+
+<div class="max-w-5xl mx-auto px-4 py-8">
+
+    <!-- Título -->
+    <div class="mb-8 text-center">
+        <h1 class="text-3xl font-bold text-gray-800 tracking-tight flex items-center justify-center gap-2">
+            <span class="material-symbols-rounded text-blue-600 text-3xl">person_search</span>
+            Detalle del Cliente
+        </h1>
+        <p class="text-gray-500 mt-2">Visualiza la información completa del cliente seleccionado.</p>
+    </div>
+
+    <!-- Tarjeta de Detalle -->
+    <div class="bg-white border border-gray-100 shadow-xl rounded-2xl p-8">
+
+        <!-- Header con nombre principal -->
+        <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-3 mb-6 border-b pb-4">
+            <div>
+                <h2 class="text-2xl font-semibold text-gray-800 flex items-center gap-2">
+                    <span class="material-symbols-rounded text-blue-600">badge</span>
+                    @Model.Nombres @Model.Apellidos
+                </h2>
+                <p class="text-gray-500 text-sm mt-1 flex items-center gap-1">
+                    <span class="material-symbols-rounded text-gray-400 text-sm">key</span>
+                    ID Cliente: <span class="font-mono text-gray-700">@Model.ClienteId</span>
+                </p>
+            </div>
+
+            <div class="flex flex-wrap gap-2">
+                <span class="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-blue-50 text-blue-700 text-xs font-medium">
+                    <span class="material-symbols-rounded text-sm">calendar_month</span>
+                    Registrado: @Model.FechaRegistro.ToString("yyyy-MM-dd")
+                </span>
+            </div>
+        </div>
+
+        <!-- Información en 2 columnas -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-sm text-gray-700">
+
+            <!-- Columna 1 -->
+            <div class="space-y-4">
+
+                <div>
+                    <div class="flex items-center gap-2 text-xs font-semibold text-gray-500 uppercase tracking-wide">
+                        <span class="material-symbols-rounded text-blue-500 text-base">credit_card</span>
+                        DNI
+                    </div>
+                    <p class="mt-1 text-gray-800">@(!string.IsNullOrWhiteSpace(Model.Dni) ? Model.Dni : "-")</p>
+                </div>
+
+                <div>
+                    <div class="flex items-center gap-2 text-xs font-semibold text-gray-500 uppercase tracking-wide">
+                        <span class="material-symbols-rounded text-blue-500 text-base">call</span>
+                        Teléfono
+                    </div>
+                    <p class="mt-1 text-gray-800">@(!string.IsNullOrWhiteSpace(Model.Telefono) ? Model.Telefono : "-")</p>
+                </div>
+
+            </div>
+
+            <!-- Columna 2 -->
+            <div class="space-y-4">
+
+                <div>
+                    <div class="flex items-center gap-2 text-xs font-semibold text-gray-500 uppercase tracking-wide">
+                        <span class="material-symbols-rounded text-blue-500 text-base">mail</span>
+                        Correo electrónico
+                    </div>
+                    <p class="mt-1 text-gray-800">@(!string.IsNullOrWhiteSpace(Model.Correo) ? Model.Correo : "-")</p>
+                </div>
+
+                <div>
+                    <div class="flex items-center gap-2 text-xs font-semibold text-gray-500 uppercase tracking-wide">
+                        <span class="material-symbols-rounded text-blue-500 text-base">home_pin</span>
+                        Dirección
+                    </div>
+                    <p class="mt-1 text-gray-800">@(!string.IsNullOrWhiteSpace(Model.Direccion) ? Model.Direccion : "-")</p>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Botones -->
+        <div class="flex flex-wrap items-center justify-end gap-3 mt-8">
+
+            <a asp-action="ListarClientes"
+               class="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl border border-gray-300
+                      text-sm text-gray-700 bg-white hover:bg-gray-100 transition">
+                <span class="material-symbols-rounded text-gray-600 text-base">arrow_back</span>
+                Volver al listado
+            </a>
+
+            <a asp-action="Edit" asp-route-id="@Model.ClienteId"
+               class="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl border border-blue-600
+                      text-sm text-blue-600 bg-blue-50 hover:bg-blue-100 transition">
+                <span class="material-symbols-rounded text-blue-600 text-base">edit</span>
+                Editar
+            </a>
+
+            <a asp-action="Delete" asp-route-id="@Model.ClienteId"
+               class="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl border border-red-500
+                      text-sm text-red-600 bg-red-50 hover:bg-red-100 transition">
+                <span class="material-symbols-rounded text-red-500 text-base">delete</span>
+                Eliminar
+            </a>
+
+        </div>
+
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

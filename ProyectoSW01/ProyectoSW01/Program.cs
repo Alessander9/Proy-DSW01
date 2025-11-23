@@ -1,7 +1,15 @@
+using ProyectoSW01.Data;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+//Registrar el repositorio de Usuario
+builder.Services.AddScoped<UsuarioRepository>();
+
+//Registrar el repositorio de Cliente
+builder.Services.AddScoped <ClienteRepository>();
 
 var app = builder.Build();
 

@@ -1,0 +1,108 @@
+﻿@model ProyectoSW01.Models.Cliente
+
+@{
+    ViewData["Title"] = "Eliminar Cliente";
+}
+
+<!-- Tailwind CDN -->
+<script src="https://cdn.tailwindcss.com"></script>
+
+<!-- Material Icons -->
+<link rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:wght@300;400;700&display=swap" />
+
+<div class="max-w-3xl mx-auto px-4 py-10">
+
+    <!-- Título -->
+    <div class="text-center mb-8">
+        <h1 class="text-3xl font-bold text-red-600 flex items-center justify-center gap-2">
+            <span class="material-symbols-rounded text-4xl">warning</span>
+            Eliminar Cliente
+        </h1>
+        <p class="text-gray-600 mt-2">
+            ¿Estás seguro que quieres eliminar este cliente?
+            <span class="font-semibold text-gray-800">Esta acción no se puede deshacer.</span>
+        </p>
+    </div>
+
+    <!-- Tarjeta de confirmación -->
+    <div class="bg-white border border-red-100 shadow-xl rounded-2xl p-6 md:p-8">
+
+        <div class="mb-6 border-b border-red-50 pb-4">
+            <h2 class="text-xl font-semibold text-gray-800 flex items-center gap-2">
+                <span class="material-symbols-rounded text-red-500">person_off</span>
+                @Model.Nombres @Model.Apellidos
+            </h2>
+            <p class="text-gray-500 text-sm mt-1 flex items-center gap-1">
+                <span class="material-symbols-rounded text-gray-400 text-sm">key</span>
+                ID Cliente: <span class="font-mono text-gray-700">@Model.ClienteId</span>
+            </p>
+        </div>
+
+        <!-- Datos del cliente en 2 columnas -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm text-gray-700">
+
+            <div class="space-y-3">
+                <div>
+                    <p class="text-xs font-semibold text-gray-500 uppercase flex items-center gap-2">
+                        <span class="material-symbols-rounded text-blue-500 text-base">credit_card</span>
+                        DNI
+                    </p>
+                    <p class="mt-1">@(!string.IsNullOrWhiteSpace(Model.Dni) ? Model.Dni : "-")</p>
+                </div>
+
+                <div>
+                    <p class="text-xs font-semibold text-gray-500 uppercase flex items-center gap-2">
+                        <span class="material-symbols-rounded text-blue-500 text-base">call</span>
+                        Teléfono
+                    </p>
+                    <p class="mt-1">@(!string.IsNullOrWhiteSpace(Model.Telefono) ? Model.Telefono : "-")</p>
+                </div>
+            </div>
+
+            <div class="space-y-3">
+                <div>
+                    <p class="text-xs font-semibold text-gray-500 uppercase flex items-center gap-2">
+                        <span class="material-symbols-rounded text-blue-500 text-base">mail</span>
+                        Correo
+                    </p>
+                    <p class="mt-1">@(!string.IsNullOrWhiteSpace(Model.Correo) ? Model.Correo : "-")</p>
+                </div>
+
+                <div>
+                    <p class="text-xs font-semibold text-gray-500 uppercase flex items-center gap-2">
+                        <span class="material-symbols-rounded text-blue-500 text-base">home_pin</span>
+                        Dirección
+                    </p>
+                    <p class="mt-1">@(!string.IsNullOrWhiteSpace(Model.Direccion) ? Model.Direccion : "-")</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Formulario de confirmación -->
+        <form asp-action="Delete" method="post" class="mt-8 flex flex-wrap justify-end gap-3">
+            @* ID oculto *@
+            <input type="hidden" asp-for="ClienteId" />
+
+            <a asp-action="ListarClientes"
+               class="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl border border-gray-300
+                      text-sm text-gray-700 bg-white hover:bg-gray-100 transition">
+                <span class="material-symbols-rounded text-gray-600 text-base">arrow_back</span>
+                Cancelar
+            </a>
+
+            <button type="submit"
+                    class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-red-600 text-white
+                           text-sm font-semibold hover:bg-red-700 shadow-md hover:shadow-lg transition">
+                <span class="material-symbols-rounded text-white text-base">delete</span>
+                Confirmar eliminación
+            </button>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

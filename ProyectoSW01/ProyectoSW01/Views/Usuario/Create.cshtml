@@ -1,0 +1,85 @@
+﻿@model ProyectoSW01.Models.Usuario
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<script src="https://cdn.tailwindcss.com?plugins=forms,typography,aspect-ratio,line-clamp"></script>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<h1 class="text-3xl font-bold text-gray-800 my-6 border-b pb-2">Crear Nuevo Usuario</h1>
+
+<div class="flex justify-center">
+    <div class="w-full max-w-4xl bg-white p-8 rounded-xl shadow-2xl">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-red-600 bg-red-50 border border-red-200 p-3 rounded mb-6"></div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-6">
+
+                <div class="mb-4">
+                    <label asp-for="IdUsuario" class="block text-sm font-medium text-gray-700 flex items-center">
+                        <span class="material-icons text-base mr-2 text-indigo-500">vpn_key</span>
+                        ID de Usuario
+                    </label>
+                    <input asp-for="IdUsuario" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2 bg-gray-100 cursor-not-allowed" readonly />
+                    <span asp-validation-for="IdUsuario" class="text-xs text-red-600"></span>
+                </div>
+
+                <div class="mb-4">
+                    <label asp-for="NombreCompleto" class="block text-sm font-medium text-gray-700 flex items-center">
+                        <span class="material-icons text-base mr-2 text-indigo-500">person</span>
+                        Nombre Completo
+                    </label>
+                    <input asp-for="NombreCompleto" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2 focus:ring-indigo-500 focus:border-indigo-500" />
+                    <span asp-validation-for="NombreCompleto" class="text-xs text-red-600"></span>
+                </div>
+
+                <div class="mb-4">
+                    <label asp-for="Correo" class="block text-sm font-medium text-gray-700 flex items-center">
+                        <span class="material-icons text-base mr-2 text-indigo-500">email</span>
+                        Correo Electrónico
+                    </label>
+                    <input asp-for="Correo" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2 focus:ring-indigo-500 focus:border-indigo-500" type="email" />
+                    <span asp-validation-for="Correo" class="text-xs text-red-600"></span>
+                </div>
+
+                <div class="mb-4">
+                    <label asp-for="Contrasena" class="block text-sm font-medium text-gray-700 flex items-center">
+                        <span class="material-icons text-base mr-2 text-indigo-500">lock</span>
+                        Contraseña
+                    </label>
+                    <input asp-for="Contrasena" type="password" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2 focus:ring-indigo-500 focus:border-indigo-500" />
+                    <span asp-validation-for="Contrasena" class="text-xs text-red-600"></span>
+                </div>
+
+                <div class="mb-6">
+                    <label asp-for="IdRol" class="block text-sm font-medium text-gray-700 flex items-center">
+                        <span class="material-icons text-base mr-2 text-indigo-500">verified_user</span>
+                        ID de Rol
+                    </label>
+                    <input asp-for="IdRol" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2 focus:ring-indigo-500 focus:border-indigo-500" />
+                    <span asp-validation-for="IdRol" class="text-xs text-red-600"></span>
+                </div>
+
+                <div></div>
+            </div>
+
+            <div class="mt-8 pt-4 border-t border-gray-200 flex justify-between items-center">
+                <a asp-action="Index" class="text-gray-600 hover:text-indigo-800 inline-flex items-center text-sm">
+                    <span class="material-icons text-lg mr-1">arrow_back</span>
+                    Volver a la Lista
+                </a>
+
+                <button type="submit" class="inline-flex items-center px-6 py-2 border border-transparent text-sm font-medium rounded-md shadow-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition duration-150 ease-in-out">
+                    <span class="material-icons text-lg mr-2">save</span>
+                    Crear Usuario
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

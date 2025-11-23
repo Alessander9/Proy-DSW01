@@ -1,0 +1,59 @@
+﻿@model IEnumerable<ProyectoSW01.Models.Usuario>
+
+@{
+    ViewData["Title"] = "ListarUsuario";
+}
+
+<h1>Lista de Usuarios</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.IdUsuario)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NombreCompleto)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Correo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Contrasena)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IdRol)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdUsuario)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NombreCompleto)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Correo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Contrasena)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdRol)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id=item.IdUsuario }) |
+                @Html.ActionLink("Details", "Details", new { id=item.IdUsuario }) |
+                @Html.ActionLink("Delete", "Delete", new { id=item.IdUsuario  })
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
