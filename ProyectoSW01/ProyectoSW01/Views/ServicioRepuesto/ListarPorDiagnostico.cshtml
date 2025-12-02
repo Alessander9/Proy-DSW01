@@ -1,0 +1,81 @@
+﻿@model IEnumerable<ProyectoSW01.Models.ServicioRepuesto>
+
+@{
+    ViewData["Title"] = "Repuestos por diagnóstico-servicio";
+    var diagServId = ViewBag.DiagServId as int? ?? 0;
+}
+
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com"></script>
+
+<!-- Material Icons -->
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+
+<div class="max-w-6xl mx-auto px-4 py-8">
+
+    <!-- Título y botón -->
+    <div class="flex items-center justify-between mb-6">
+        <div>
+            <h1 class="text-3xl font-bold text-gray-800 flex items-center gap-2">
+                <span class="material-icons text-blue-700">construction</span>
+                Repuestos usados en el servicio
+            </h1>
+            <p class="text-sm text-gray-500 mt-1">
+                Diagnóstico-Servicio ID: <span class="font-semibold">@diagServId</span>
+            </p>
+        </div>
+
+        <a asp-action="Create"
+           asp-route-diagServId="@diagServId"
+           class="inline-flex items-center px-4 py-2 bg-blue-700 text-white rounded-lg shadow hover:bg-blue-800 transition">
+            <span class="material-icons text-sm mr-1">add</span>
+            Agregar repuesto
+        </a>
+    </div>
+
+    <!-- Tabla -->
+    <div class="bg-white shadow rounded-xl overflow-x-auto">
+        <table class="min-w-full divide-y divide-gray-200 text-sm">
+            <thead class="bg-blue-700 text-white">
+                <tr>
+                    <th class="px-4 py-3 text-left font-semibold">ID</th>
+                    <th class="px-4 py-3 text-left font-semibold">DiagServ ID</th>
+                    <th class="px-4 py-3 text-left font-semibold">Repuesto ID</th>
+                    <th class="px-4 py-3 text-left font-semibold">Cantidad</th>
+                    <th class="px-4 py-3 text-left font-semibold">Precio unitario</th>
+                    <th class="px-4 py-3 text-left font-semibold">Subtotal</th>
+                    <th class="px-4 py-3 text-right font-semibold">Acciones</th>
+                </tr>
+            </thead>
+            <tbody class="divide-y divide-gray-200">
+                @foreach (var item in Model)
+                {
+                    var subtotal = item.Cantidad * item.Precio;
+                    <tr class="hover:bg-gray-50">
+                        <td class="px-4 py-3">@item.ServRepId</td>
+                        <td class="px-4 py-3">@item.DiagServId</td>
+                        <td class="px-4 py-3">@item.RepuestoId</td>
+                        <td class="px-4 py-3">@item.Cantidad</td>
+                        <td class="px-4 py-3">@item.Precio.ToString("C")</td>
+                        <td class="px-4 py-3">@subtotal.ToString("C")</td>
+                        <td class="px-4 py-3 text-right flex justify-end gap-2">
+                            <a asp-action="Edit" asp-route-id="@item.ServRepId"
+                               class="text-yellow-600 hover:text-yellow-800 transition">
+                                <span class="material-icons text-base">edit</span>
+                            </a>
+                            <a asp-action="Details" asp-route-id="@item.ServRepId"
+                               class="text-blue-600 hover:text-blue-800 transition">
+                                <span class="material-icons text-base">visibility</span>
+                            </a>
+                            <a asp-action="Delete" asp-route-id="@item.ServRepId"
+                               class="text-red-600 hover:text-red-800 transition">
+                                <span class="material-icons text-base">delete</span>
+                            </a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
+</div>

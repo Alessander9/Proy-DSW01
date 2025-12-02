@@ -1,0 +1,70 @@
+﻿@model IEnumerable<ProyectoSW01.Models.Servicio>
+
+@{
+    ViewData["Title"] = "Servicios";
+}
+
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
+
+<div class="mb-8 flex items-center justify-between">
+    <div>
+        <h1 class="text-3xl font-bold text-gray-800">Servicios del Taller</h1>
+        <p class="text-gray-500 mt-1 text-sm">
+            Gestión de los servicios que ofrece el taller mecánico.
+        </p>
+    </div>
+
+    <a asp-action="Create"
+       class="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-blue-600 text-white text-sm font-semibold shadow hover:bg-blue-700">
+        <span class="material-icons-round text-base">add</span>
+        Nuevo servicio
+    </a>
+</div>
+
+<div class="bg-white shadow-xl rounded-2xl overflow-hidden">
+    <table class="min-w-full text-sm">
+        <thead class="bg-gray-900 text-gray-100 text-left">
+            <tr>
+                <th class="px-4 py-3">ID</th>
+                <th class="px-4 py-3">Nombre</th>
+                <th class="px-4 py-3">Categoría</th>
+                <th class="px-4 py-3">Precio base</th>
+                <th class="px-4 py-3">Tiempo (h)</th>
+                <th class="px-4 py-3 text-center">Acciones</th>
+            </tr>
+        </thead>
+        <tbody class="divide-y divide-gray-100">
+            @foreach (var item in Model)
+            {
+                <tr class="hover:bg-gray-50">
+                    <td class="px-4 py-3">@item.ServicioId</td>
+                    <td class="px-4 py-3 font-semibold text-gray-800">@item.Nombre</td>
+                    <td class="px-4 py-3">@item.Categoria</td>
+                    <td class="px-4 py-3 text-green-700 font-semibold">
+                        S/ @item.PrecioBase.ToString("0.00")
+                    </td>
+                    <td class="px-4 py-3">
+                        @(item.TiempoEstimadoHoras.HasValue? item.TiempoEstimadoHoras.Value.ToString("0.0") : "-")
+                    </td>
+                    <td class="px-4 py-3">
+                        <div class="flex items-center justify-center gap-2">
+                            <a asp-action="Details" asp-route-id="@item.ServicioId"
+                               class="inline-flex items-center justify-center w-9 h-9 rounded-full bg-blue-50 text-blue-600 hover:bg-blue-100">
+                                <span class="material-icons-round text-base">visibility</span>
+                            </a>
+                            <a asp-action="Edit" asp-route-id="@item.ServicioId"
+                               class="inline-flex items-center justify-center w-9 h-9 rounded-full bg-amber-50 text-amber-600 hover:bg-amber-100">
+                                <span class="material-icons-round text-base">edit</span>
+                            </a>
+                            <a asp-action="Delete" asp-route-id="@item.ServicioId"
+                               class="inline-flex items-center justify-center w-9 h-9 rounded-full bg-red-50 text-red-600 hover:bg-red-100">
+                                <span class="material-icons-round text-base">delete</span>
+                            </a>
+                        </div>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

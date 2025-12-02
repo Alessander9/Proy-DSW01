@@ -1,59 +1,78 @@
 ﻿@model IEnumerable<ProyectoSW01.Models.Usuario>
 
 @{
-    ViewData["Title"] = "ListarUsuario";
+    ViewData["Title"] = "Listar Usuarios";
 }
 
-<h1>Lista de Usuarios</h1>
+<!-- Tailwind CDN -->
+<script src="https://cdn.tailwindcss.com"></script>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.IdUsuario)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.NombreCompleto)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Correo)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Contrasena)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.IdRol)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.IdUsuario)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.NombreCompleto)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Correo)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Contrasena)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.IdRol)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { id=item.IdUsuario }) |
-                @Html.ActionLink("Details", "Details", new { id=item.IdUsuario }) |
-                @Html.ActionLink("Delete", "Delete", new { id=item.IdUsuario  })
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+<!-- Material Icons CDN -->
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+
+<div class="max-w-6xl mx-auto px-4 py-8">
+
+    <!-- Título -->
+    <div class="flex items-center justify-between mb-6">
+        <h1 class="text-3xl font-bold text-gray-800 flex items-center gap-2">
+            <span class="material-icons text-blue-700">group</span>
+            Lista de Usuarios
+        </h1>
+
+        <a asp-action="Create"
+           class="inline-flex items-center px-4 py-2 bg-blue-700 text-white rounded-lg shadow hover:bg-blue-800 transition">
+            <span class="material-icons mr-1 text-sm">add</span>
+            Nuevo Usuario
+        </a>
+    </div>
+
+    <!-- Tabla -->
+    <div class="overflow-x-auto bg-white rounded-xl shadow">
+        <table class="min-w-full divide-y divide-gray-200">
+            <thead class="bg-blue-700 text-white">
+                <tr>
+                    <th class="px-4 py-3 text-left text-sm font-semibold">ID</th>
+                    <th class="px-4 py-3 text-left text-sm font-semibold">Nombre Completo</th>
+                    <th class="px-4 py-3 text-left text-sm font-semibold">Correo</th>
+                    <th class="px-4 py-3 text-left text-sm font-semibold">Rol</th>
+                    <th class="px-4 py-3 text-right text-sm font-semibold">Acciones</th>
+                </tr>
+            </thead>
+
+            <tbody class="divide-y divide-gray-200">
+
+                @foreach (var item in Model)
+                {
+                    <tr class="hover:bg-gray-50">
+                        <td class="px-4 py-3 text-sm">@item.IdUsuario</td>
+                        <td class="px-4 py-3 text-sm">@item.NombreCompleto</td>
+                        <td class="px-4 py-3 text-sm">@item.Correo</td>
+                        <td class="px-4 py-3 text-sm">@item.IdRol</td>
+
+                        <td class="px-4 py-3 text-right flex justify-end gap-2">
+
+                            <!-- Edit -->
+                            <a asp-action="Edit" asp-route-id="@item.IdUsuario"
+                               class="text-blue-700 hover:text-blue-900 inline-flex items-center px-2 py-1 rounded">
+                                <span class="material-icons text-base">edit</span>
+                            </a>
+
+                            <!-- Details -->
+                            <a asp-action="Details" asp-route-id="@item.IdUsuario"
+                               class="text-green-700 hover:text-green-900 inline-flex items-center px-2 py-1 rounded">
+                                <span class="material-icons text-base">visibility</span>
+                            </a>
+
+                            <!-- Delete -->
+                            <a asp-action="Delete" asp-route-id="@item.IdUsuario"
+                               class="text-red-600 hover:text-red-800 inline-flex items-center px-2 py-1 rounded">
+                                <span class="material-icons text-base">delete</span>
+                            </a>
+                        </td>
+                    </tr>
+                }
+
+            </tbody>
+        </table>
+    </div>
+</div>

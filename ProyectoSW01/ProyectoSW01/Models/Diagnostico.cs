@@ -36,5 +36,10 @@ namespace ProyectoSW01.Models
         [StringLength(20, ErrorMessage = "El estado no debe exceder los 20 caracteres")]
         [Display(Name = "Estado del diagnóstico", Prompt = "Ej. pendiente, en_proceso, completado")]
         public string Estado { get; set; }
+
+        public string Placa { get; set; }
+        public string Modelo { get; set; }
+        public string MecanicoNombre { get; set; }
+
     }
 }

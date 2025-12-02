@@ -1,0 +1,79 @@
+﻿@model ProyectoSW01.Models.Diagnostico
+
+@{
+    ViewData["Title"] = "Detalle de diagnóstico";
+}
+
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
+
+<h1 class="text-3xl font-bold mb-6 text-gray-800 flex items-center gap-2">
+    <span class="material-icons-round text-blue-600">info</span>
+    Detalle de diagnóstico
+</h1>
+
+<div class="bg-white p-8 rounded-2xl shadow-xl max-w-3xl">
+
+    <dl class="grid grid-cols-1 md:grid-cols-2 gap-6 text-sm">
+        <div>
+            <dt class="flex items-center gap-2 font-semibold text-gray-600 mb-1">
+                <span class="material-icons-round text-gray-500 text-base">tag</span>
+                ID
+            </dt>
+            <dd class="text-gray-900">@Model.DiagnosticoId</dd>
+        </div>
+
+        <div>
+            <dt class="flex items-center gap-2 font-semibold text-gray-600 mb-1">
+                <span class="material-icons-round text-gray-500 text-base">directions_car</span>
+                Vehículo
+            </dt>
+            <dd class="text-gray-900">@Model.VehiculoId</dd>
+        </div>
+
+        <div>
+            <dt class="flex items-center gap-2 font-semibold text-gray-600 mb-1">
+                <span class="material-icons-round text-gray-500 text-base">engineering</span>
+                Mecánico
+            </dt>
+            <dd class="text-gray-900">@Model.MecanicoId</dd>
+        </div>
+
+        <div>
+            <dt class="flex items-center gap-2 font-semibold text-gray-600 mb-1">
+                <span class="material-icons-round text-gray-500 text-base">event</span>
+                Fecha
+            </dt>
+            <dd class="text-gray-900">@Model.Fecha</dd>
+        </div>
+
+        <div class="md:col-span-2">
+            <dt class="flex items-center gap-2 font-semibold text-gray-600 mb-1">
+                <span class="material-icons-round text-gray-500 text-base">description</span>
+                Descripción
+            </dt>
+            <dd class="text-gray-900">@Model.Descripcion</dd>
+        </div>
+
+        <div>
+            <dt class="flex items-center gap-2 font-semibold text-gray-600 mb-1">
+                <span class="material-icons-round text-gray-500 text-base">flag</span>
+                Estado
+            </dt>
+            <dd class="text-gray-900">@Model.Estado</dd>
+        </div>
+    </dl>
+
+    <div class="mt-8 flex gap-3">
+        <a asp-action="Edit" asp-route-id="@Model.DiagnosticoId"
+           class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-emerald-600 text-white text-sm font-semibold hover:bg-emerald-700">
+            <span class="material-icons-round text-base">edit</span>
+            Editar
+        </a>
+        <a asp-action="ListarDiagnosticos"
+           class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl border border-gray-300 text-sm text-gray-700 hover:bg-gray-100">
+            <span class="material-icons-round text-base">arrow_back</span>
+            Volver al listado
+        </a>
+    </div>
+</div>

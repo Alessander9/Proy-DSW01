@@ -1,0 +1,89 @@
+﻿@model ProyectoSW01.Models.Vehiculo
+
+<!-- Tailwind -->
+<script src="https://cdn.tailwindcss.com"></script>
+
+<!-- Material Icons -->
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
+
+<h1 class="text-3xl font-bold mb-6 flex items-center gap-2">
+    <span class="material-icons-round text-blue-600">directions_car</span>
+    Detalles del Vehículo
+</h1>
+
+<div class="bg-white p-8 rounded-xl shadow-xl w-full md:w-2/3 space-y-6">
+
+    <dl class="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+        <div>
+            <dt class="font-bold flex items-center gap-2">
+                <span class="material-icons-round text-gray-700">tag</span>
+                ID
+            </dt>
+            <dd>@Model.VehiculoId</dd>
+        </div>
+
+        <div>
+            <dt class="font-bold flex items-center gap-2">
+                <span class="material-icons-round text-gray-700">person</span>
+                Cliente
+            </dt>
+            <dd>@Model.ClienteNombreCompleto</dd>
+        </div>
+
+        <div>
+            <dt class="font-bold flex items-center gap-2">
+                <span class="material-icons-round text-gray-700">commute</span>
+                Marca
+            </dt>
+            <dd>@Model.Marca</dd>
+        </div>
+
+        <div>
+            <dt class="font-bold flex items-center gap-2">
+                <span class="material-icons-round text-gray-700">directions_car_filled</span>
+                Modelo
+            </dt>
+            <dd>@Model.Modelo</dd>
+        </div>
+
+        <div>
+            <dt class="font-bold flex items-center gap-2">
+                <span class="material-icons-round text-gray-700">calendar_today</span>
+                Año
+            </dt>
+            <dd>@Model.Anio</dd>
+        </div>
+
+        <div>
+            <dt class="font-bold flex items-center gap-2">
+                <span class="material-icons-round text-gray-700">confirmation_number</span>
+                Placa
+            </dt>
+            <dd>@Model.Placa</dd>
+        </div>
+
+        <div>
+            <dt class="font-bold flex items-center gap-2">
+                <span class="material-icons-round text-gray-700">qr_code</span>
+                VIN
+            </dt>
+            <dd>@Model.Vin</dd>
+        </div>
+
+        <div>
+            <dt class="font-bold flex items-center gap-2">
+                <span class="material-icons-round text-gray-700">schedule</span>
+                Fecha Registro
+            </dt>
+            <dd>@Model.FechaRegistro</dd>
+        </div>
+
+    </dl>
+
+    <a asp-action="ListarVehiculos"
+       class="mt-6 inline-flex items-center gap-2 text-blue-600 hover:underline">
+        <span class="material-icons-round">arrow_back</span>
+        Volver
+    </a>
+</div>

@@ -1,0 +1,56 @@
+﻿@model IEnumerable<ProyectoSW01.Models.Vehiculo>
+
+@{
+    ViewData["Title"] = "Vehículos";
+}
+
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
+
+<h1 class="text-3xl font-bold mb-6">Vehículos Registrados</h1>
+
+<div class="mb-6">
+    <a asp-action="Create"
+       class="px-5 py-2 bg-blue-600 text-white rounded-lg shadow hover:bg-blue-700 inline-flex items-center">
+        <span class="material-icons-round mr-2">add</span>
+        Registrar Vehículo
+    </a>
+</div>
+
+<table class="min-w-full bg-white shadow-lg rounded-lg overflow-hidden">
+    <thead class="bg-gray-900 text-white">
+        <tr>
+            <th class="px-4 py-3 text-left">ID</th>
+            <th class="px-4 py-3 text-left">Cliente</th>
+            <th class="px-4 py-3 text-left">Marca</th>
+            <th class="px-4 py-3 text-left">Modelo</th>
+            <th class="px-4 py-3 text-left">Año</th>
+            <th class="px-4 py-3 text-left">Placa</th>
+            <th class="px-4 py-3 text-left">Opciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr class="border-b hover:bg-gray-100">
+                <td class="px-4 py-3">@item.VehiculoId</td>
+                <td class="px-4 py-3">@item.ClienteNombreCompleto</td>>
+                <td class="px-4 py-3">@item.Marca</td>
+                <td class="px-4 py-3">@item.Modelo</td>
+                <td class="px-4 py-3">@item.Anio</td>
+                <td class="px-4 py-3">@item.Placa</td>
+                <td class="px-4 py-3">
+                    <a asp-action="Details" asp-route-id="@item.VehiculoId" class="text-blue-600 hover:underline mr-4">
+                        <span class="material-icons-round">visibility</span>
+                    </a>
+                    <a asp-action="Edit" asp-route-id="@item.VehiculoId" class="text-green-600 hover:underline mr-4">
+                        <span class="material-icons-round">edit</span>
+                    </a>
+                    <a asp-action="Delete" asp-route-id="@item.VehiculoId" class="text-red-600 hover:underline">
+                        <span class="material-icons-round">delete</span>
+                    </a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

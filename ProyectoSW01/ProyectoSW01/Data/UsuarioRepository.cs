@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Data;
 using System.Threading.Tasks;
 using Microsoft.Data.SqlClient;
@@ -17,124 +16,181 @@ namespace ProyectoSW01.Data
             _connectionString = configuration.GetConnectionString("CibertecConnection");
         }
 
-         // LISTAR TODOS LOS USUARIOS
-          public async Task<List<Usuario>> ObtenerUsuariosAsync()
+        // ============================
+        // LISTAR USUARIOS
+        // ============================
+        public async Task<List<Usuario>> ListarUsuariosAsync()
         {
             var lista = new List<Usuario>();
 
-            string sql = @"SELECT id_usuario, nombre_completo, correo, contrasena, id_rol
-                           FROM usuario";
+            using var connection = new SqlConnection(_connectionString);
+            using var command = new SqlCommand("ListarUsuarios", connection);
+            command.CommandType = CommandType.StoredProcedure;
 
-            using (var conn = new SqlConnection(_connectionString))
-            using (var cmd = new SqlCommand(sql, conn))
+            await connection.OpenAsync();
+            using var reader = await command.ExecuteReaderAsync();
+
+            while (await reader.ReadAsync())
             {
-                await conn.OpenAsync();
-
-                using (var reader = await cmd.ExecuteReaderAsync())
+                lista.Add(new Usuario
                 {
-                    while (await reader.ReadAsync())
-                    {
-                        var u = new Usuario
-                        {
-                            IdUsuario = reader.GetInt32(reader.GetOrdinal("id_usuario")),
-                            NombreCompleto = reader.GetString(reader.GetOrdinal("nombre_completo")),
-                            Correo = reader.GetString(reader.GetOrdinal("correo")),
-                            Contrasena = reader.GetString(reader.GetOrdinal("contrasena")),
-                            IdRol = reader.GetInt32(reader.GetOrdinal("id_rol"))
-                        };
-                        lista.Add(u);
-                    }
-                }
+                    IdUsuario = (int)reader["id_usuario"],
+                    NombreCompleto = reader["nombre_completo"].ToString(),
+                    Correo = reader["correo"].ToString(),
+                    Contrasena = reader["contrasena"].ToString(),
+                    IdRol = (int)reader["id_rol"]
+                });
             }
 
             return lista;
         }
 
-         // OBTENER UN USUARIO POR ID
-         public async Task<Usuario?> ObtenerUsuarioPorIdAsync(int idUsuario)
+        // ============================
+        // REGISTRAR USUARIO
+        // ============================
+        public async Task RegistrarUsuarioAsync(Usuario usuario)
         {
-            Usuario? usuario = null;
+            using var connection = new SqlConnection(_connectionString);
+            using var command = new SqlCommand("RegistrarUsuario", connection);
+            command.CommandType = CommandType.StoredProcedure;
 
-            string sql = @"SELECT id_usuario, nombre_completo, correo, contrasena, id_rol
-                           FROM usuario
-                           WHERE id_usuario = @id_usuario";
+            command.Parameters.AddWithValue("@nombre_completo", usuario.NombreCompleto);
+            command.Parameters.AddWithValue("@correo", usuario.Correo);
+            command.Parameters.AddWithValue("@contrasena", usuario.Contrasena);
+            command.Parameters.AddWithValue("@id_rol", usuario.IdRol);
 
-            using (var conn = new SqlConnection(_connectionString))
-            using (var cmd = new SqlCommand(sql, conn))
+            await connection.OpenAsync();
+            await command.ExecuteNonQueryAsync();
+        }
+
+        // ============================
+        // OBTENER POR ID
+        // ============================
+        public async Task<Usuario?> ObtenerUsuarioPorIdAsync(int idUsuario)
+        {
+            using var connection = new SqlConnection(_connectionString);
+            using var command = new SqlCommand("ObtenerUsuarioPorId", connection);
+            command.CommandType = CommandType.StoredProcedure;
+
+            command.Parameters.AddWithValue("@id_usuario", idUsuario);
+
+            await connection.OpenAsync();
+            using var reader = await command.ExecuteReaderAsync();
+
+            if (await reader.ReadAsync())
             {
-                cmd.Parameters.AddWithValue("@id_usuario", idUsuario);
-
-                await conn.OpenAsync();
-
-                using (var reader = await cmd.ExecuteReaderAsync())
+                return new Usuario
                 {
-                    if (await reader.ReadAsync())
-                    {
-                        usuario = new Usuario
-                        {
-                            IdUsuario = reader.GetInt32(reader.GetOrdinal("id_usuario")),
-                            NombreCompleto = reader.GetString(reader.GetOrdinal("nombre_completo")),
-                            Correo = reader.GetString(reader.GetOrdinal("correo")),
-                            Contrasena = reader.GetString(reader.GetOrdinal("contrasena")),
-                            IdRol = reader.GetInt32(reader.GetOrdinal("id_rol"))
-                        };
-                    }
-                }
+                    IdUsuario = (int)reader["id_usuario"],
+                    NombreCompleto = reader["nombre_completo"].ToString(),
+                    Correo = reader["correo"].ToString(),
+                    Contrasena = reader["contrasena"].ToString(),
+                    IdRol = (int)reader["id_rol"]
+                };
             }
 
-            return usuario;
+            return null;
         }
 
-         // AGREGAR USUARIO (RegistrarUsuario)
-       
-        public async Task AgregarUsuarioAsync(Usuario u)
+        // ============================
+        // ACTUALIZAR
+        // ============================
+        public async Task ActualizarUsuarioAsync(Usuario usuario)
         {
-            using (var conn = new SqlConnection(_connectionString))
-            using (var cmd = new SqlCommand("RegistrarUsuario", conn))
-            {
-                cmd.CommandType = CommandType.StoredProcedure;
-                cmd.Parameters.AddWithValue("@nombre_completo", u.NombreCompleto);
-                cmd.Parameters.AddWithValue("@correo", u.Correo);
-                cmd.Parameters.AddWithValue("@contrasena", u.Contrasena);
-                cmd.Parameters.AddWithValue("@id_rol", u.IdRol);
+            using var connection = new SqlConnection(_connectionString);
+            using var command = new SqlCommand("ActualizarUsuario", connection);
+            command.CommandType = CommandType.StoredProcedure;
 
-                await conn.OpenAsync();
-                await cmd.ExecuteNonQueryAsync();
-            }
+            command.Parameters.AddWithValue("@id_usuario", usuario.IdUsuario);
+            command.Parameters.AddWithValue("@nombre_completo", usuario.NombreCompleto);
+            command.Parameters.AddWithValue("@correo", usuario.Correo);
+            command.Parameters.AddWithValue("@id_rol", usuario.IdRol);
+
+            await connection.OpenAsync();
+            await command.ExecuteNonQueryAsync();
         }
-         
-        // ACTUALIZAR USUARIO 
-        
-        public async Task ActualizarUsuarioAsync(Usuario u)
+
+
+        public async Task<Usuario?> DetailsAsync(int idUsuario)
         {
-            using (var conn = new SqlConnection(_connectionString))
-            using (var cmd = new SqlCommand("ActualizarUsuario", conn))
-            {
-                cmd.CommandType = CommandType.StoredProcedure;
-                cmd.Parameters.AddWithValue("@id_usuario", u.IdUsuario);
-                cmd.Parameters.AddWithValue("@nombre_completo", u.NombreCompleto);
-                cmd.Parameters.AddWithValue("@correo", u.Correo);
-                cmd.Parameters.AddWithValue("@id_rol", u.IdRol);
+            using var connection = new SqlConnection(_connectionString);
+            using var command = new SqlCommand("ObtenerUsuarioPorId", connection);
+            // Si el procedimiento almacenado es específico para Obtener por ID, úsalo.
+            // Si quieres un nuevo SP llamado 'DetallesUsuario', cambia la cadena.
+            command.CommandType = CommandType.StoredProcedure;
 
-                await conn.OpenAsync();
-                await cmd.ExecuteNonQueryAsync();
+            command.Parameters.AddWithValue("@id_usuario", idUsuario);
+
+            await connection.OpenAsync();
+            using var reader = await command.ExecuteReaderAsync();
+
+            if (await reader.ReadAsync())
+            {
+                // Mapeo del objeto Usuario
+                return new Usuario
+                {
+                    IdUsuario = (int)reader["id_usuario"],
+                    NombreCompleto = reader["nombre_completo"].ToString(),
+                    Correo = reader["correo"].ToString(),
+                    Contrasena = reader["contrasena"].ToString(),
+                    IdRol = (int)reader["id_rol"]
+                };
             }
+
+            return null; // Retorna null si no se encuentra el usuario
         }
 
-     
-        // ELIMINAR USUARIO 
-     
+
+
+        // ============================
+        // ELIMINAR
+        // ============================
         public async Task EliminarUsuarioAsync(int idUsuario)
         {
-            string sql = @"DELETE FROM usuario WHERE id_usuario = @id_usuario";
+            using var connection = new SqlConnection(_connectionString);
+            using var command = new SqlCommand("EliminarUsuario", connection);
+            command.CommandType = CommandType.StoredProcedure;
 
-            using (var conn = new SqlConnection(_connectionString))
-            using (var cmd = new SqlCommand(sql, conn))
-            {
-                cmd.Parameters.AddWithValue("@id_usuario", idUsuario);
-                await conn.OpenAsync();
-                await cmd.ExecuteNonQueryAsync();
-            }
+            command.Parameters.AddWithValue("@id_usuario", idUsuario);
+
+            await connection.OpenAsync();
+            await command.ExecuteNonQueryAsync();
         }
+
+
+        public async Task<List<Usuario>> ListarMecanicosAsync()
+        {
+            var lista = new List<Usuario>();
+
+            using var cn = new SqlConnection(_connectionString);
+            using var cmd = new SqlCommand(@"
+        SELECT u.id_usuario, u.nombre_completo, u.correo, u.contrasena, u.id_rol
+        FROM usuario u
+        INNER JOIN rol r ON r.id_rol = u.id_rol
+        WHERE r.nombre = 'MECANICO'
+        ORDER BY u.nombre_completo;
+    ", cn);
+
+            await cn.OpenAsync();
+            using var dr = await cmd.ExecuteReaderAsync();
+
+            while (await dr.ReadAsync())
+            {
+                lista.Add(new Usuario
+                {
+                    IdUsuario = (int)dr["id_usuario"],          // 👈 OJO
+                    NombreCompleto = dr["nombre_completo"].ToString(), // 👈 OJO
+                    Correo = dr["correo"].ToString(),
+                    Contrasena = dr["contrasena"].ToString(),
+                    IdRol = (int)dr["id_rol"]
+                });
+            }
+
+            return lista;
+        }
+
+
+
+
     }
 }

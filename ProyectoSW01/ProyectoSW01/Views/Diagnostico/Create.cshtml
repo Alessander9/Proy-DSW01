@@ -1,0 +1,114 @@
+﻿@model ProyectoSW01.Models.Diagnostico
+
+@{
+    ViewData["Title"] = "Registrar diagnóstico";
+}
+
+<!-- Tailwind CDN -->
+<script src="https://cdn.tailwindcss.com"></script>
+
+<!-- Material Icons CDN -->
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+
+<div class="max-w-3xl mx-auto px-4 py-8">
+
+    <!-- Título -->
+    <h1 class="text-3xl font-bold text-gray-800 flex items-center gap-2 mb-6">
+        <span class="material-icons text-blue-700">medical_information</span>
+        Registrar diagnóstico
+    </h1>
+
+    <div class="bg-white rounded-xl shadow p-6">
+
+        <form asp-action="Create" method="post">
+            @Html.AntiForgeryToken()
+
+            <div asp-validation-summary="ModelOnly"
+                 class="mb-4 p-3 rounded bg-red-100 text-red-700 text-sm"></div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+
+                <!-- Vehículo -->
+                <div>
+                    <label asp-for="VehiculoId"
+                           class="block text-sm font-semibold text-blue-900 mb-1 flex items-center gap-1">
+                        <span class="material-icons text-sm">directions_car</span>
+                        Vehículo
+                    </label>
+                    <select asp-for="VehiculoId"
+                            asp-items="ViewBag.Vehiculos"
+                            class="w-full rounded-lg border-gray-300 text-sm focus:ring-2 focus:ring-blue-600 focus:border-blue-600">
+                        <option value="">Seleccione un vehículo</option>
+                    </select>
+                    <span asp-validation-for="VehiculoId" class="text-xs text-red-600"></span>
+                </div>
+
+                <!-- Mecánico -->
+                <div>
+                    <label asp-for="MecanicoId"
+                           class="block text-sm font-semibold text-blue-900 mb-1 flex items-center gap-1">
+                        <span class="material-icons text-sm">engineering</span>
+                        Mecánico
+                    </label>
+                    <select asp-for="MecanicoId"
+                            asp-items="ViewBag.Mecanicos"
+                            class="w-full rounded-lg border-gray-300 text-sm focus:ring-2 focus:ring-blue-600 focus:border-blue-600">
+                        <option value="">Seleccione un mecánico</option>
+                    </select>
+                    <span asp-validation-for="MecanicoId" class="text-xs text-red-600"></span>
+                </div>
+
+                <!-- Estado -->
+                <div>
+                    <label asp-for="Estado"
+                           class="block text-sm font-semibold text-blue-900 mb-1 flex items-center gap-1">
+                        <span class="material-icons text-sm">flag</span>
+                        Estado
+                    </label>
+                    <select asp-for="Estado"
+                            class="w-full rounded-lg border-gray-300 text-sm focus:ring-2 focus:ring-blue-600 focus:border-blue-600">
+                        <option value="pendiente">Pendiente</option>
+                        <option value="en_proceso">En proceso</option>
+                        <option value="completado">Completado</option>
+                    </select>
+                    <span asp-validation-for="Estado" class="text-xs text-red-600"></span>
+                </div>
+
+                <!-- Descripción -->
+                <div class="md:col-span-2">
+                    <label asp-for="Descripcion"
+                           class="block text-sm font-semibold text-blue-900 mb-1 flex items-center gap-1">
+                        <span class="material-icons text-sm">description</span>
+                        Descripción
+                    </label>
+                    <textarea asp-for="Descripcion" rows="3"
+                              class="w-full rounded-lg border-gray-300 text-sm focus:ring-2 focus:ring-blue-600 focus:border-blue-600"></textarea>
+                    <span asp-validation-for="Descripcion" class="text-xs text-red-600"></span>
+                </div>
+
+            </div>
+
+            <!-- Botones -->
+            <div class="mt-6 flex justify-end gap-3">
+                <a asp-action="ListarDiagnosticos"
+                   class="inline-flex items-center px-4 py-2 bg-gray-300 text-gray-800 rounded-lg hover:bg-gray-400 transition">
+                    <span class="material-icons text-sm mr-1">arrow_back</span>
+                    Volver
+                </a>
+
+                <button type="submit"
+                        class="inline-flex items-center px-4 py-2 bg-blue-700 text-white rounded-lg hover:bg-blue-800 transition">
+                    <span class="material-icons text-sm mr-1">save</span>
+                    Guardar
+                </button>
+            </div>
+
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

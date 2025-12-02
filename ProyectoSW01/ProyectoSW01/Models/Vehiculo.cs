@@ -1,6 +1,7 @@
 ﻿
 using System;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ProyectoSW01.Models
 {
@@ -19,6 +20,11 @@ namespace ProyectoSW01.Models
         [Required(ErrorMessage = "El cliente es obligatorio")]
         [Display(Name = "Cliente", Prompt = "Seleccione el cliente propietario")]
         public int ClienteId { get; set; }
+
+        [Display(Name = "Cliente", Prompt = "Ingrese nombre del propietario")]
+        [NotMapped]
+
+        public string? ClienteNombreCompleto { get; set; }
 
         [StringLength(50, ErrorMessage = "La marca no debe exceder los 50 caracteres")]
         [Display(Name = "Marca", Prompt = "Ej. Toyota, Hyundai, Kia")]

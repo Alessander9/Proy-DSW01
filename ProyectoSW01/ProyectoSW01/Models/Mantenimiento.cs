@@ -36,5 +36,13 @@ namespace ProyectoSW01.Models
         [StringLength(2000, ErrorMessage = "Las notas no deben exceder los 2000 caracteres")]
         [Display(Name = "Notas", Prompt = "Ingrese notas adicionales del mantenimiento")]
         public string Notas { get; set; }
+
+        public string? Placa { get; set; }
+        public string? Marca { get; set; }
+        public string? Modelo { get; set; }
+        public string? ServicioNombre { get; set; }
+
+
+
     }
 }

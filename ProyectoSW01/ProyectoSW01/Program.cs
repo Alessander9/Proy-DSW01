@@ -11,6 +11,37 @@ builder.Services.AddScoped<UsuarioRepository>();
 //Registrar el repositorio de Cliente
 builder.Services.AddScoped <ClienteRepository>();
 
+//Registrar el repositorio de Vehiculo
+builder.Services.AddScoped<VehiculoRepository>();
+
+//Registrar el repositorio de Servicio
+builder.Services.AddScoped<ServicioRepository>();
+
+//Registrar el repositorio de Diagnostico
+builder.Services.AddScoped<DiagnosticoRepository>();
+
+//Registrar el repositorio de Mantenimiento
+builder.Services.AddScoped<MantenimientoRepository>();
+
+//Registrar el repositorio de Rol
+builder.Services.AddScoped<RolRepository>();
+
+//Registrar el repositorio de Repuesto
+builder.Services.AddScoped<RepuestoRepository>();
+
+//Registrar el repositorio de ServicioRepuesto
+builder.Services.AddScoped<ServicioRepuestoRepository>();
+
+//Registrar el repositorio de DiagnosticoServicio
+builder.Services.AddScoped<DiagnosticoServicioRepository>();
+
+//Registrar el repositorio de OrdenTrabajo
+builder.Services.AddScoped<OrdenTrabajoRepository>();
+
+//Registrar el repositorio de Carrito
+builder.Services.AddScoped<CarritoRepository>();
+
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

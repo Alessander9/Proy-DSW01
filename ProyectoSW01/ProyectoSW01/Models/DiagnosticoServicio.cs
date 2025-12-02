@@ -26,9 +26,8 @@ namespace ProyectoSW01.Models
         [Display(Name = "Precio sugerido", Prompt = "Ingrese el precio sugerido")]
         public decimal Precio { get; set; }
 
-        [StringLength(2000, ErrorMessage = "La observación no debe exceder los 2000 caracteres")]
-        [Display(Name = "Observación", Prompt = "Ingrese observaciones adicionales")]
-        public string Observacion { get; set; }
+        [Display(Name = "Servicio")]
+        public string ServicioNombre { get; set; }
     }
 
 }

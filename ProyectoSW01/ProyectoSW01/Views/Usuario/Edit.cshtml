@@ -1,53 +1,113 @@
 ﻿@model ProyectoSW01.Models.Usuario
 
 @{
-    ViewData["Title"] = "Edit";
+    ViewData["Title"] = "Editar Usuario";
 }
 
-<h1>Edit</h1>
+<!-- Tailwind CDN -->
+<script src="https://cdn.tailwindcss.com"></script>
 
-<h4>Usuario</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
+<!-- Material Icons CDN -->
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+
+<div class="max-w-3xl mx-auto px-4 py-8">
+
+    <!-- Título -->
+    <h1 class="text-3xl font-bold text-gray-800 flex items-center gap-2 mb-6">
+        <span class="material-icons text-blue-700">edit</span>
+        Editar Usuario
+    </h1>
+
+    <!-- Tarjeta -->
+    <div class="bg-white shadow rounded-xl p-6">
+
         <form asp-action="Edit">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="IdUsuario" class="control-label"></label>
-                <input asp-for="IdUsuario" class="form-control" />
-                <span asp-validation-for="IdUsuario" class="text-danger"></span>
+            @Html.AntiForgeryToken()
+
+            <!-- mostrar ID usuario oculto -->
+            <input asp-for="IdUsuario" type="hidden" />
+
+            <div asp-validation-summary="ModelOnly" class="mb-4 text-red-600 text-sm"></div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+
+                <!-- Nombre Completo -->
+                <div>
+                    <label asp-for="NombreCompleto"
+                           class="block text-sm font-medium text-gray-700 mb-1 flex items-center gap-1">
+                        <span class="material-icons text-blue-700 text-sm">badge</span>
+                        Nombre completo
+                    </label>
+                    <input asp-for="NombreCompleto"
+                           class="w-full rounded-lg border-gray-300 text-sm focus:ring-2 focus:ring-blue-600 focus:border-blue-600" />
+                    <span asp-validation-for="NombreCompleto" class="text-xs text-red-600"></span>
+                </div>
+
+                <!-- Correo -->
+                <div>
+                    <label asp-for="Correo"
+                           class="block text-sm font-medium text-gray-700 mb-1 flex items-center gap-1">
+                        <span class="material-icons text-blue-700 text-sm">mail</span>
+                        Correo
+                    </label>
+                    <input asp-for="Correo"
+                           class="w-full rounded-lg border-gray-300 text-sm focus:ring-2 focus:ring-blue-600 focus:border-blue-600" />
+                    <span asp-validation-for="Correo" class="text-xs text-red-600"></span>
+                </div>
+
+                <!-- Contraseña -->
+                <div>
+                    <label asp-for="Contrasena"
+                           class="block text-sm font-medium text-gray-700 mb-1 flex items-center gap-1">
+                        <span class="material-icons text-blue-700 text-sm">lock</span>
+                        Contraseña
+                    </label>
+                    <input asp-for="Contrasena"
+                           class="w-full rounded-lg border-gray-300 text-sm focus:ring-2 focus:ring-blue-600 focus:border-blue-600" />
+                    <span asp-validation-for="Contrasena" class="text-xs text-red-600"></span>
+                </div>
+
+                <!-- Rol -->
+                <div>
+                    <label asp-for="IdRol"
+                           class="block text-sm font-medium text-gray-700 mb-1 flex items-center gap-1">
+                        <span class="material-icons text-blue-700 text-sm">admin_panel_settings</span>
+                        Rol
+                    </label>
+
+                    <select asp-for="IdRol" asp-items="ViewBag.Roles"
+                            class="w-full rounded-lg border-gray-300 text-sm focus:ring-2 focus:ring-blue-600 focus:border-blue-600">
+                        <option value="">Seleccione un rol</option>
+                    </select>
+
+                    <span asp-validation-for="IdRol" class="text-xs text-red-600"></span>
+                </div>
+
+            </div> <!-- grid -->
+            <!-- Botones -->
+            <div class="mt-6 flex justify-end gap-3">
+
+                <a asp-action="ListarUsuario"
+                   class="inline-flex items-center px-4 py-2 bg-gray-300 text-gray-800 rounded-lg hover:bg-gray-400 transition">
+                    <span class="material-icons text-sm mr-1">arrow_back</span>
+                    Volver
+                </a>
+
+                <button type="submit"
+                        class="inline-flex items-center px-4 py-2 bg-blue-700 text-white rounded-lg hover:bg-blue-800 transition">
+                    <span class="material-icons text-sm mr-1">save</span>
+                    Guardar cambios
+                </button>
+
             </div>
-            <div class="form-group">
-                <label asp-for="NombreCompleto" class="control-label"></label>
-                <input asp-for="NombreCompleto" class="form-control" />
-                <span asp-validation-for="NombreCompleto" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Correo" class="control-label"></label>
-                <input asp-for="Correo" class="form-control" />
-                <span asp-validation-for="Correo" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Contrasena" class="control-label"></label>
-                <input asp-for="Contrasena" class="form-control" />
-                <span asp-validation-for="Contrasena" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="IdRol" class="control-label"></label>
-                <input asp-for="IdRol" class="form-control" />
-                <span asp-validation-for="IdRol" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
-            </div>
+
         </form>
+
     </div>
 </div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
-
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
 }

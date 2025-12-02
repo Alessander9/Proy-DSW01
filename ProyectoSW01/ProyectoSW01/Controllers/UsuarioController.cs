@@ -1,106 +1,152 @@
-﻿using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using ProyectoSW01.Data;
+﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using ProyectoSW01.Models;
+using ProyectoSW01.Data;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace ProyectoSW01.Controllers
 {
     public class UsuarioController : Controller
     {
-        private readonly UsuarioRepository _usuarioRepo;
+        private readonly UsuarioRepository _usuarioRepository;
+        private readonly RolRepository _rolRepository;
 
-        public UsuarioController(UsuarioRepository usuarioRepo)
+        public UsuarioController(UsuarioRepository usuarioRepository, RolRepository rolRepository)
         {
-            _usuarioRepo = usuarioRepo;
+            _usuarioRepository = usuarioRepository;
+            _rolRepository = rolRepository;
         }
 
-        // ==============================
-        // GET: /Usuarios
-        // ==============================
+        // ============================================
+        // MÉTODO PARA CARGAR ROLES EN DROPDOWN
+        // ============================================
+        private async Task CargarRolesAsync(int? seleccionado = null)
+        {
+            var roles = await _rolRepository.ListarRolesAsync();
+
+            ViewBag.Roles = roles.Select(r => new SelectListItem
+            {
+                Value = r.IdRol.ToString(),
+                Text = r.Nombre,
+                Selected = seleccionado != null && r.IdRol == seleccionado.Value
+            }).ToList();
+        }
+
+        // ============================================
+        // LISTAR USUARIOS
+        // ============================================
         public async Task<IActionResult> ListarUsuario()
         {
-            var usuarios = await _usuarioRepo.ObtenerUsuariosAsync();
+            var usuarios = await _usuarioRepository.ListarUsuariosAsync();
             return View(usuarios);
         }
 
-        // ==============================
-        // GET: /Usuarios/Create
-        // ==============================
-        [HttpGet]
-        public IActionResult Create()
+        // ============================================
+        // CREAR USUARIO (GET)
+        // ============================================
+        public async Task<IActionResult> Create()
         {
+            await CargarRolesAsync();
             return View();
         }
 
-        // ==============================
-        // POST: /Usuarios/Create
-        // ==============================
+        // ============================================
+        // CREAR USUARIO (POST)
+        // ============================================
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(Usuario usuario)
         {
+            // ❗ Importante: IdUsuario NO se valida ni se envía
+            ModelState.Remove(nameof(usuario.IdUsuario));
+
             if (!ModelState.IsValid)
             {
+                await CargarRolesAsync(usuario.IdRol);
                 return View(usuario);
             }
 
-            await _usuarioRepo.AgregarUsuarioAsync(usuario);
+            await _usuarioRepository.RegistrarUsuarioAsync(usuario);
             return RedirectToAction(nameof(ListarUsuario));
         }
 
-        // ==============================
-        // GET: /Usuarios/Edit/5
-        // ==============================
-        [HttpGet]
+        // ============================================
+        // EDITAR USUARIO (GET)
+        // ============================================
         public async Task<IActionResult> Edit(int id)
         {
-            var usuario = await _usuarioRepo.ObtenerUsuarioPorIdAsync(id);
+            var usuario = await _usuarioRepository.ObtenerUsuarioPorIdAsync(id);
             if (usuario == null)
-            {
-                return NotFound();
-            }
+                return RedirectToAction(nameof(ListarUsuario));
+
+            await CargarRolesAsync(usuario.IdRol);
             return View(usuario);
         }
 
-        // ==============================
-        // POST: /Usuarios/Edit/5
-        // ==============================
+        // ============================================
+        // EDITAR USUARIO (POST)
+        // ============================================
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(Usuario usuario)
+        public async Task<IActionResult> Edit(int id, Usuario usuario)
         {
+            ModelState.Remove(nameof(usuario.IdUsuario));
+
+            if (id != usuario.IdUsuario)
+                return BadRequest();
+
             if (!ModelState.IsValid)
             {
+                await CargarRolesAsync(usuario.IdRol);
                 return View(usuario);
             }
 
-            await _usuarioRepo.ActualizarUsuarioAsync(usuario);
-            return RedirectToAction(nameof(Index));
+            await _usuarioRepository.ActualizarUsuarioAsync(usuario);
+            return RedirectToAction(nameof(ListarUsuario));
         }
 
-        // ==============================
-        // GET: /Usuarios/Delete/5
-        // ==============================
-        [HttpGet]
-        public async Task<IActionResult> Delete(int id)
+        public async Task<IActionResult> Details(int id)
         {
-            var usuario = await _usuarioRepo.ObtenerUsuarioPorIdAsync(id);
+            // 1. Obtener el usuario por ID
+            var usuario = await _usuarioRepository.ObtenerUsuarioPorIdAsync(id);
+
+            // 2. Verificar si el usuario existe
             if (usuario == null)
-            {
-                return NotFound();
-            }
+                return NotFound(); // O RedirectToAction(nameof(ListarUsuario)) si prefieres volver a la lista
+
+            // 3. Opcional: Cargar roles (si la vista de detalles también los necesita mostrar)
+            // Generalmente, la vista de detalles solo muestra el nombre del rol,
+            // pero si tu modelo no tiene el nombre, podrías necesitarlo.
+            // await CargarRolesAsync(usuario.IdRol); 
+
+            // 4. Devolver la vista con el modelo
             return View(usuario);
         }
 
-        // ==============================
-        // POST: /Usuarios/DeleteConfirmed/5
-        // ==============================
-        [HttpPost]
+
+
+        // ============================================
+        // ELIMINAR USUARIO (GET)
+        // ============================================
+        public async Task<IActionResult> Delete(int id)
+        {
+            var usuario = await _usuarioRepository.ObtenerUsuarioPorIdAsync(id);
+            if (usuario == null)
+                return RedirectToAction(nameof(ListarUsuario));
+
+            return View(usuario);
+        }
+
+        // ============================================
+        // ELIMINAR USUARIO (POST)
+        // ============================================
+        [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            await _usuarioRepo.EliminarUsuarioAsync(id);
-            return RedirectToAction(nameof(Index));
+            await _usuarioRepository.EliminarUsuarioAsync(id);
+            return RedirectToAction(nameof(ListarUsuario));
         }
     }
 }
