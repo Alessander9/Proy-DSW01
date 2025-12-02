@@ -18,6 +18,11 @@ namespace ProyectoSW01.Controllers
             return View();
         }
 
+        public IActionResult MenuPrincipal() {
+
+            return View();
+        }
+
         public IActionResult Privacy()
         {
             return View();

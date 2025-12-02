@@ -90,5 +90,11 @@ namespace ProyectoSW01.Controllers
             return RedirectToAction(nameof(ListarClientes)); // regresa al listado de clientes
         }
 
+        public IActionResult MenuCliente()
+        {
+
+            return View();
+        }
+
     }
 }

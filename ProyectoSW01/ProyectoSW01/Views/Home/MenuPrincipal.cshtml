@@ -1,0 +1,224 @@
+﻿@{
+    ViewData["Title"] = "Menú Principal";
+}
+
+<!-- TAILWIND CDNs -->
+<script src="https://cdn.tailwindcss.com"></script>
+
+<!-- MATERIAL ICONS -->
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+<a asp-controller="Home" asp-action="Index" class="btn btn-primary">
+    Ir a la pagina principal
+</a>
+
+<div class="min-h-[80vh] bg-slate-950 flex items-center justify-center py-10">
+    <div class="w-full max-w-6xl px-4">
+        <!-- Título -->
+        <div class="text-center mb-10">
+            <h2 class="text-3xl md:text-4xl font-semibold text-slate-50 mb-3">
+                Menú Principal del Taller
+            </h2>
+            <p class="text-slate-400 text-sm md:text-base">
+                Gestiona clientes, vehículos, servicios y órdenes de trabajo desde un solo lugar.
+            </p>
+        </div>
+
+        <!-- Grid de tarjetas -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+
+            <!-- Clientes -->
+            <div class="group bg-slate-900/70 border border-slate-800 rounded-2xl p-5 shadow-lg shadow-slate-900/40 hover:shadow-xl hover:-translate-y-1 transition-all duration-200">
+                <div class="flex items-center justify-between mb-4">
+                    <div class="flex items-center gap-2">
+                        <span class="material-icons text-indigo-400 text-3xl">
+                            group
+                        </span>
+                        <h5 class="text-slate-50 font-semibold text-lg">
+                            Clientes
+                        </h5>
+                    </div>
+                </div>
+                <p class="text-slate-400 text-sm mb-4">
+                    Registro y gestión de la información de tus clientes.
+                </p>
+                <a asp-controller="Cliente" asp-action="MenuCliente"
+                   class="inline-flex items-center gap-1 text-sm font-medium px-3 py-2 rounded-full bg-indigo-500 hover:bg-indigo-400 text-white transition-colors">
+                    Ir
+                    <span class="material-icons text-base">
+                        arrow_forward
+                    </span>
+                </a>
+            </div>
+
+            <!-- Vehículos -->
+            <div class="group bg-slate-900/70 border border-slate-800 rounded-2xl p-5 shadow-lg shadow-slate-900/40 hover:shadow-xl hover:-translate-y-1 transition-all duration-200">
+                <div class="flex items-center justify-between mb-4">
+                    <div class="flex items-center gap-2">
+                        <span class="material-icons text-emerald-400 text-3xl">
+                            directions_car
+                        </span>
+                        <h5 class="text-slate-50 font-semibold text-lg">
+                            Vehículos
+                        </h5>
+                    </div>
+                </div>
+                <p class="text-slate-400 text-sm mb-4">
+                    Gestión de vehículos asociados a cada cliente.
+                </p>
+                <a asp-controller="Vehiculo" asp-action="Index"
+                   class="inline-flex items-center gap-1 text-sm font-medium px-3 py-2 rounded-full bg-emerald-500 hover:bg-emerald-400 text-white transition-colors">
+                    Ir
+                    <span class="material-icons text-base">
+                        arrow_forward
+                    </span>
+                </a>
+            </div>
+
+            <!-- Servicios -->
+            <div class="group bg-slate-900/70 border border-slate-800 rounded-2xl p-5 shadow-lg shadow-slate-900/40 hover:shadow-xl hover:-translate-y-1 transition-all duration-200">
+                <div class="flex items-center justify-between mb-4">
+                    <div class="flex items-center gap-2">
+                        <span class="material-icons text-amber-400 text-3xl">
+                            build
+                        </span>
+                        <h5 class="text-slate-50 font-semibold text-lg">
+                            Servicios
+                        </h5>
+                    </div>
+                </div>
+                <p class="text-slate-400 text-sm mb-4">
+                    Configura los servicios disponibles en el taller.
+                </p>
+                <a asp-controller="Servicio" asp-action="Index"
+                   class="inline-flex items-center gap-1 text-sm font-medium px-3 py-2 rounded-full bg-amber-500 hover:bg-amber-400 text-white transition-colors">
+                    Ir
+                    <span class="material-icons text-base">
+                        arrow_forward
+                    </span>
+                </a>
+            </div>
+
+            <!-- Carrito -->
+            <div class="group bg-slate-900/70 border border-slate-800 rounded-2xl p-5 shadow-lg shadow-slate-900/40 hover:shadow-xl hover:-translate-y-1 transition-all duration-200">
+                <div class="flex items-center justify-between mb-4">
+                    <div class="flex items-center gap-2">
+                        <span class="material-icons text-pink-400 text-3xl">
+                            shopping_cart
+                        </span>
+                        <h5 class="text-slate-50 font-semibold text-lg">
+                            Carrito
+                        </h5>
+                    </div>
+                </div>
+                <p class="text-slate-400 text-sm mb-4">
+                    Servicios seleccionados para generar la orden de trabajo.
+                </p>
+                <a asp-controller="Carrito" asp-action="Index"
+                   class="inline-flex items-center gap-1 text-sm font-medium px-3 py-2 rounded-full bg-pink-500 hover:bg-pink-400 text-white transition-colors">
+                    Ir
+                    <span class="material-icons text-base">
+                        arrow_forward
+                    </span>
+                </a>
+            </div>
+
+            <!-- Órdenes de Trabajo -->
+            <div class="group bg-slate-900/70 border border-slate-800 rounded-2xl p-5 shadow-lg shadow-slate-900/40 hover:shadow-xl hover:-translate-y-1 transition-all duration-200">
+                <div class="flex items-center justify-between mb-4">
+                    <div class="flex items-center gap-2">
+                        <span class="material-icons text-sky-400 text-3xl">
+                            assignment
+                        </span>
+                        <h5 class="text-slate-50 font-semibold text-lg">
+                            Órdenes de Trabajo
+                        </h5>
+                    </div>
+                </div>
+                <p class="text-slate-400 text-sm mb-4">
+                    Control del estado y detalle de cada trabajo.
+                </p>
+                <a asp-controller="OrdenTrabajo" asp-action="Index"
+                   class="inline-flex items-center gap-1 text-sm font-medium px-3 py-2 rounded-full bg-sky-500 hover:bg-sky-400 text-white transition-colors">
+                    Ir
+                    <span class="material-icons text-base">
+                        arrow_forward
+                    </span>
+                </a>
+            </div>
+
+            <!-- Mantenimientos -->
+            <div class="group bg-slate-900/70 border border-slate-800 rounded-2xl p-5 shadow-lg shadow-slate-900/40 hover:shadow-xl hover:-translate-y-1 transition-all duration-200">
+                <div class="flex items-center justify-between mb-4">
+                    <div class="flex items-center gap-2">
+                        <span class="material-icons text-lime-400 text-3xl">
+                            engineering
+                        </span>
+                        <h5 class="text-slate-50 font-semibold text-lg">
+                            Mantenimientos
+                        </h5>
+                    </div>
+                </div>
+                <p class="text-slate-400 text-sm mb-4">
+                    Historial de trabajos realizados a cada vehículo.
+                </p>
+                <a asp-controller="Mantenimiento" asp-action="Index"
+                   class="inline-flex items-center gap-1 text-sm font-medium px-3 py-2 rounded-full bg-lime-500 hover:bg-lime-400 text-white transition-colors">
+                    Ir
+                    <span class="material-icons text-base">
+                        arrow_forward
+                    </span>
+                </a>
+            </div>
+
+            <!-- Repuestos -->
+            <div class="group bg-slate-900/70 border border-slate-800 rounded-2xl p-5 shadow-lg shadow-slate-900/40 hover:shadow-xl hover:-translate-y-1 transition-all duration-200">
+                <div class="flex items-center justify-between mb-4">
+                    <div class="flex items-center gap-2">
+                        <span class="material-icons text-orange-400 text-3xl">
+                            inventory_2
+                        </span>
+                        <h5 class="text-slate-50 font-semibold text-lg">
+                            Repuestos
+                        </h5>
+                    </div>
+                </div>
+                <p class="text-slate-400 text-sm mb-4">
+                    Gestión del inventario de repuestos del taller.
+                </p>
+                <a asp-controller="Repuesto" asp-action="Index"
+                   class="inline-flex items-center gap-1 text-sm font-medium px-3 py-2 rounded-full bg-orange-500 hover:bg-orange-400 text-white transition-colors">
+                    Ir
+                    <span class="material-icons text-base">
+                        arrow_forward
+                    </span>
+                </a>
+            </div>
+
+            <!-- Administración -->
+            <div class="group bg-slate-900/70 border border-slate-800 rounded-2xl p-5 shadow-lg shadow-slate-900/40 hover:shadow-xl hover:-translate-y-1 transition-all duration-200">
+                <div class="flex items-center justify-between mb-4">
+                    <div class="flex items-center gap-2">
+                        <span class="material-icons text-rose-400 text-3xl">
+                            admin_panel_settings
+                        </span>
+                        <h5 class="text-slate-50 font-semibold text-lg">
+                            Administración
+                        </h5>
+                    </div>
+                </div>
+                <p class="text-slate-400 text-sm mb-4">
+                    Gestión de usuarios y roles del sistema.
+                </p>
+                <a asp-controller="Usuario" asp-action="Index"
+                   class="inline-flex items-center gap-1 text-sm font-medium px-3 py-2 rounded-full bg-rose-500 hover:bg-rose-400 text-white transition-colors">
+                    Ir
+                    <span class="material-icons text-base">
+                        arrow_forward
+                    </span>
+                </a>
+            </div>
+
+        </div>
+    </div>
+</div>
