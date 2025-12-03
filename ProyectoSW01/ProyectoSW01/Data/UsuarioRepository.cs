@@ -189,6 +189,35 @@ namespace ProyectoSW01.Data
             return lista;
         }
 
+        public async Task<Usuario?> ValidarUsuarioAsync(string correo, string contrasena)
+        {
+            using var connection = new SqlConnection(_connectionString);
+            using var command = new SqlCommand("ValidarUsuario", connection);
+            command.CommandType = CommandType.StoredProcedure;
+
+            command.Parameters.AddWithValue("@correo", correo);
+            command.Parameters.AddWithValue("@contrasena", contrasena);
+
+            await connection.OpenAsync();
+
+            using var reader = await command.ExecuteReaderAsync();
+
+            if (await reader.ReadAsync())
+            {
+                return new Usuario
+                {
+                    IdUsuario = (int)reader["id_usuario"],
+                    NombreCompleto = reader["nombre_completo"].ToString(),
+                    Correo = reader["correo"].ToString(),
+                    Contrasena = reader["contrasena"].ToString(),
+                    IdRol = (int)reader["id_rol"]
+                };
+            }
+
+            return null;
+        }
+
+
 
 
 

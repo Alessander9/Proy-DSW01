@@ -2,6 +2,7 @@ using ProyectoSW01.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 
+
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
@@ -41,8 +42,9 @@ builder.Services.AddScoped<OrdenTrabajoRepository>();
 //Registrar el repositorio de Carrito
 builder.Services.AddScoped<CarritoRepository>();
 
-
+builder.Services.AddSession();
 var app = builder.Build();
+
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
@@ -58,9 +60,10 @@ app.UseStaticFiles();
 app.UseRouting();
 
 app.UseAuthorization();
+app.UseSession();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+    pattern: "{controller=Auth}/{action=Login}/{id?}");
 
 app.Run();
