@@ -1,0 +1,153 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\alexf\\OneDrive\\Desktop\\CIBERTEC\\DES. SERVICIOS WEB 01\\ProyectoSW01\\ProyectoSW01\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{03739E4B-BBE2-40BE-B1D9-8603493B5F9F}|ProyectoSW01\\ProyectoSW01.csproj|c:\\users\\alexf\\onedrive\\desktop\\cibertec\\des. servicios web 01\\proyectosw01\\proyectosw01\\proyectosw01\\data\\clienterepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{03739E4B-BBE2-40BE-B1D9-8603493B5F9F}|ProyectoSW01\\ProyectoSW01.csproj|solutionrelative:proyectosw01\\data\\clienterepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{03739E4B-BBE2-40BE-B1D9-8603493B5F9F}|ProyectoSW01\\ProyectoSW01.csproj|c:\\users\\alexf\\onedrive\\desktop\\cibertec\\des. servicios web 01\\proyectosw01\\proyectosw01\\proyectosw01\\views\\ordentrabajo\\resumenfinalpdf.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{03739E4B-BBE2-40BE-B1D9-8603493B5F9F}|ProyectoSW01\\ProyectoSW01.csproj|solutionrelative:proyectosw01\\views\\ordentrabajo\\resumenfinalpdf.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{03739E4B-BBE2-40BE-B1D9-8603493B5F9F}|ProyectoSW01\\ProyectoSW01.csproj|c:\\users\\alexf\\onedrive\\desktop\\cibertec\\des. servicios web 01\\proyectosw01\\proyectosw01\\proyectosw01\\controllers\\ordentrabajocontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{03739E4B-BBE2-40BE-B1D9-8603493B5F9F}|ProyectoSW01\\ProyectoSW01.csproj|solutionrelative:proyectosw01\\controllers\\ordentrabajocontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{03739E4B-BBE2-40BE-B1D9-8603493B5F9F}|ProyectoSW01\\ProyectoSW01.csproj|c:\\users\\alexf\\onedrive\\desktop\\cibertec\\des. servicios web 01\\proyectosw01\\proyectosw01\\proyectosw01\\data\\ordentrabajorepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{03739E4B-BBE2-40BE-B1D9-8603493B5F9F}|ProyectoSW01\\ProyectoSW01.csproj|solutionrelative:proyectosw01\\data\\ordentrabajorepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{03739E4B-BBE2-40BE-B1D9-8603493B5F9F}|ProyectoSW01\\ProyectoSW01.csproj|c:\\users\\alexf\\onedrive\\desktop\\cibertec\\des. servicios web 01\\proyectosw01\\proyectosw01\\proyectosw01\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{03739E4B-BBE2-40BE-B1D9-8603493B5F9F}|ProyectoSW01\\ProyectoSW01.csproj|solutionrelative:proyectosw01\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{03739E4B-BBE2-40BE-B1D9-8603493B5F9F}|ProyectoSW01\\ProyectoSW01.csproj|c:\\users\\alexf\\onedrive\\desktop\\cibertec\\des. servicios web 01\\proyectosw01\\proyectosw01\\proyectosw01\\views\\ordentrabajo\\resumenfinal.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{03739E4B-BBE2-40BE-B1D9-8603493B5F9F}|ProyectoSW01\\ProyectoSW01.csproj|solutionrelative:proyectosw01\\views\\ordentrabajo\\resumenfinal.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{03739E4B-BBE2-40BE-B1D9-8603493B5F9F}|ProyectoSW01\\ProyectoSW01.csproj|c:\\users\\alexf\\onedrive\\desktop\\cibertec\\des. servicios web 01\\proyectosw01\\proyectosw01\\proyectosw01\\models\\ordentrabajo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{03739E4B-BBE2-40BE-B1D9-8603493B5F9F}|ProyectoSW01\\ProyectoSW01.csproj|solutionrelative:proyectosw01\\models\\ordentrabajo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": -1,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{34e76e81-ee4a-11d0-ae2e-00a0c90fffc3}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:1:0:{d212f56b-c48a-434c-a121-1c5d80b59b9f}"
+            }
+          ]
+        },
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "ClienteRepository.cs",
+              "DocumentMoniker": "C:\\Users\\alexf\\OneDrive\\Desktop\\CIBERTEC\\DES. SERVICIOS WEB 01\\ProyectoSW01\\ProyectoSW01\\ProyectoSW01\\Data\\ClienteRepository.cs",
+              "RelativeDocumentMoniker": "ProyectoSW01\\Data\\ClienteRepository.cs",
+              "ToolTip": "C:\\Users\\alexf\\OneDrive\\Desktop\\CIBERTEC\\DES. SERVICIOS WEB 01\\ProyectoSW01\\ProyectoSW01\\ProyectoSW01\\Data\\ClienteRepository.cs",
+              "RelativeToolTip": "ProyectoSW01\\Data\\ClienteRepository.cs",
+              "ViewState": "AgIAAFIAAAAAAAAAAAAkwF0AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-06T22:43:45.807Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "ResumenFinalPdf.cshtml",
+              "DocumentMoniker": "C:\\Users\\alexf\\OneDrive\\Desktop\\CIBERTEC\\DES. SERVICIOS WEB 01\\ProyectoSW01\\ProyectoSW01\\ProyectoSW01\\Views\\OrdenTrabajo\\ResumenFinalPdf.cshtml",
+              "RelativeDocumentMoniker": "ProyectoSW01\\Views\\OrdenTrabajo\\ResumenFinalPdf.cshtml",
+              "ToolTip": "C:\\Users\\alexf\\OneDrive\\Desktop\\CIBERTEC\\DES. SERVICIOS WEB 01\\ProyectoSW01\\ProyectoSW01\\ProyectoSW01\\Views\\OrdenTrabajo\\ResumenFinalPdf.cshtml",
+              "RelativeToolTip": "ProyectoSW01\\Views\\OrdenTrabajo\\ResumenFinalPdf.cshtml",
+              "ViewState": "AgIAAC8BAAAAAAAAAAAAwDoBAAAfAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-12-06T22:36:03.159Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\alexf\\OneDrive\\Desktop\\CIBERTEC\\DES. SERVICIOS WEB 01\\ProyectoSW01\\ProyectoSW01\\ProyectoSW01\\Program.cs",
+              "RelativeDocumentMoniker": "ProyectoSW01\\Program.cs",
+              "ToolTip": "C:\\Users\\alexf\\OneDrive\\Desktop\\CIBERTEC\\DES. SERVICIOS WEB 01\\ProyectoSW01\\ProyectoSW01\\ProyectoSW01\\Program.cs",
+              "RelativeToolTip": "ProyectoSW01\\Program.cs",
+              "ViewState": "AgIAACMAAAAAAAAAAAAmwDMAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-06T22:09:56.427Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "OrdenTrabajoRepository.cs",
+              "DocumentMoniker": "C:\\Users\\alexf\\OneDrive\\Desktop\\CIBERTEC\\DES. SERVICIOS WEB 01\\ProyectoSW01\\ProyectoSW01\\ProyectoSW01\\Data\\OrdenTrabajoRepository.cs",
+              "RelativeDocumentMoniker": "ProyectoSW01\\Data\\OrdenTrabajoRepository.cs",
+              "ToolTip": "C:\\Users\\alexf\\OneDrive\\Desktop\\CIBERTEC\\DES. SERVICIOS WEB 01\\ProyectoSW01\\ProyectoSW01\\ProyectoSW01\\Data\\OrdenTrabajoRepository.cs",
+              "RelativeToolTip": "ProyectoSW01\\Data\\OrdenTrabajoRepository.cs",
+              "ViewState": "AgIAAAMBAAAAAAAAAAAUwOgAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-06T21:27:16.101Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "OrdenTrabajo.cs",
+              "DocumentMoniker": "C:\\Users\\alexf\\OneDrive\\Desktop\\CIBERTEC\\DES. SERVICIOS WEB 01\\ProyectoSW01\\ProyectoSW01\\ProyectoSW01\\Models\\OrdenTrabajo.cs",
+              "RelativeDocumentMoniker": "ProyectoSW01\\Models\\OrdenTrabajo.cs",
+              "ToolTip": "C:\\Users\\alexf\\OneDrive\\Desktop\\CIBERTEC\\DES. SERVICIOS WEB 01\\ProyectoSW01\\ProyectoSW01\\ProyectoSW01\\Models\\OrdenTrabajo.cs",
+              "RelativeToolTip": "ProyectoSW01\\Models\\OrdenTrabajo.cs",
+              "ViewState": "AgIAACUAAAAAAAAAAAAwwC4AAAAlAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-06T21:22:19.841Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "ResumenFinal.cshtml",
+              "DocumentMoniker": "C:\\Users\\alexf\\OneDrive\\Desktop\\CIBERTEC\\DES. SERVICIOS WEB 01\\ProyectoSW01\\ProyectoSW01\\ProyectoSW01\\Views\\OrdenTrabajo\\ResumenFinal.cshtml",
+              "RelativeDocumentMoniker": "ProyectoSW01\\Views\\OrdenTrabajo\\ResumenFinal.cshtml",
+              "ToolTip": "C:\\Users\\alexf\\OneDrive\\Desktop\\CIBERTEC\\DES. SERVICIOS WEB 01\\ProyectoSW01\\ProyectoSW01\\ProyectoSW01\\Views\\OrdenTrabajo\\ResumenFinal.cshtml",
+              "RelativeToolTip": "ProyectoSW01\\Views\\OrdenTrabajo\\ResumenFinal.cshtml",
+              "ViewState": "AgIAACIAAAAAAAAAAAAUwD0AAAARAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-12-06T21:20:48.672Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "OrdenTrabajoController.cs",
+              "DocumentMoniker": "C:\\Users\\alexf\\OneDrive\\Desktop\\CIBERTEC\\DES. SERVICIOS WEB 01\\ProyectoSW01\\ProyectoSW01\\ProyectoSW01\\Controllers\\OrdenTrabajoController.cs",
+              "RelativeDocumentMoniker": "ProyectoSW01\\Controllers\\OrdenTrabajoController.cs",
+              "ToolTip": "C:\\Users\\alexf\\OneDrive\\Desktop\\CIBERTEC\\DES. SERVICIOS WEB 01\\ProyectoSW01\\ProyectoSW01\\ProyectoSW01\\Controllers\\OrdenTrabajoController.cs",
+              "RelativeToolTip": "ProyectoSW01\\Controllers\\OrdenTrabajoController.cs",
+              "ViewState": "AgIAAHcAAAAAAAAAAAAIwHwAAAAvAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-06T21:19:48.773Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

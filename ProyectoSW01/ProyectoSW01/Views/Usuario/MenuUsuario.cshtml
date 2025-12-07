@@ -1,0 +1,127 @@
+﻿@{
+    ViewData["Title"] = "Menú de Usuarios";
+}
+
+<!-- TAILWIND -->
+<script src="https://cdn.tailwindcss.com"></script>
+
+<!-- MATERIAL ICONS -->
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+<div class="min-h-[80vh] bg-slate-950 flex items-center justify-center py-10">
+    <div class="w-full max-w-5xl px-4">
+
+        <!-- Título -->
+        <div class="flex items-center justify-between mb-8">
+            <div>
+                <h2 class="text-3xl md:text-4xl font-semibold text-slate-50 mb-2 flex items-center gap-2">
+                    <span class="material-icons text-rose-400 text-4xl">
+                        admin_panel_settings
+                    </span>
+                    Menú de Usuarios
+                </h2>
+                <p class="text-slate-400 text-sm md:text-base">
+                    Administra usuarios, roles y permisos del sistema del taller.
+                </p>
+            </div>
+
+            <!-- Volver al menú principal -->
+            <div>
+                <a asp-controller="Home" asp-action="MenuPrincipal"
+                   class="inline-flex items-center gap-1 px-4 py-2 rounded-full text-sm font-medium
+                          bg-slate-800 hover:bg-slate-700 text-slate-100 border border-slate-700 transition-colors">
+                    <span class="material-icons text-base">arrow_back</span>
+                    Volver al menú principal
+                </a>
+            </div>
+        </div>
+
+        <!-- Grid de opciones -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+
+            <!-- Listar Usuarios -->
+            <div class="group bg-slate-900/70 border border-slate-800 rounded-2xl p-5
+                        shadow-lg shadow-slate-900/40 hover:shadow-xl hover:-translate-y-1
+                        hover:shadow-[0_0_25px_rgba(244,63,94,0.7)] transition-all duration-200">
+
+                <div class="flex items-center gap-2 mb-3">
+                    <span class="material-icons text-rose-400 text-3xl">list_alt</span>
+                    <h3 class="text-slate-50 font-semibold text-lg">Listar usuarios</h3>
+                </div>
+
+                <p class="text-slate-400 text-sm mb-4">
+                    Visualiza todos los usuarios del sistema: administradores, recepcionistas y mecánicos.
+                </p>
+
+                <a asp-controller="Usuario" asp-action="Index"
+                   class="inline-flex items-center gap-1 text-sm font-medium px-3 py-2 rounded-full
+                          bg-rose-500 hover:bg-rose-400 text-white transition-colors">
+                    Ir al listado
+                    <span class="material-icons text-base">arrow_forward</span>
+                </a>
+            </div>
+
+            <!-- Registrar Usuario -->
+            <div class="group bg-slate-900/70 border border-slate-800 rounded-2xl p-5
+                        shadow-lg shadow-slate-900/40 hover:shadow-xl hover:-translate-y-1
+                        hover:shadow-[0_0_25px_rgba(244,63,94,0.7)] transition-all duration-200">
+
+                <div class="flex items-center gap-2 mb-3">
+                    <span class="material-icons text-rose-400 text-3xl">person_add</span>
+                    <h3 class="text-slate-50 font-semibold text-lg">Registrar usuario</h3>
+                </div>
+
+                <p class="text-slate-400 text-sm mb-4">
+                    Crea nuevos usuarios asignando rol, correo y credenciales de acceso al sistema.
+                </p>
+
+                <a asp-controller="Usuario" asp-action="Create"
+                   class="inline-flex items-center gap-1 text-sm font-medium px-3 py-2 rounded-full
+                          bg-rose-500 hover:bg-rose-400 text-white transition-colors">
+                    Nuevo usuario
+                    <span class="material-icons text-base">person_add_alt</span>
+                </a>
+            </div>
+
+            <!-- Buscar Usuarios -->
+            <div class="group bg-slate-900/70 border border-slate-800 rounded-2xl p-5
+                        shadow-lg shadow-slate-900/40 hover:shadow-xl hover:-translate-y-1
+                        hover:shadow-[0_0_25px_rgba(244,63,94,0.7)] transition-all duration-200">
+
+                <div class="flex items-center gap-2 mb-3">
+                    <span class="material-icons text-rose-300 text-3xl">search</span>
+                    <h3 class="text-slate-50 font-semibold text-lg">Buscar usuarios</h3>
+                </div>
+
+                <p class="text-slate-400 text-sm mb-4">
+                    Filtra usuarios por nombre, correo o rol según lo permita tu vista de listado.
+                </p>
+
+                <a asp-controller="Usuario" asp-action="Buscar"
+                   class="inline-flex items-center gap-1 text-sm font-medium px-3 py-2 rounded-full
+                          bg-rose-400 hover:bg-rose-300 text-white transition-colors">
+                    Buscar
+                    <span class="material-icons text-base">manage_search</span>
+                </a>
+            </div>
+
+        </div>
+
+        <!-- Sección informativa -->
+        <div class="mt-10 bg-slate-900/60 border border-slate-800 rounded-2xl p-5">
+            <h4 class="text-slate-100 font-semibold mb-3 flex items-center gap-2 text-base md:text-lg">
+                <span class="material-icons text-rose-400">info</span>
+                Acciones disponibles en usuarios
+            </h4>
+
+            <ul class="list-disc list-inside text-slate-400 text-sm space-y-1">
+                <li><span class="text-slate-200 font-medium">Registrar:</span> agregar un nuevo usuario con rol asignado.</li>
+                <li><span class="text-slate-200 font-medium">Listar:</span> visualizar y administrar todos los usuarios del sistema.</li>
+                <li><span class="text-slate-200 font-medium">Editar:</span> actualizar nombre, correo o rol del usuario.</li>
+                <li><span class="text-slate-200 font-medium">Eliminar:</span> dar de baja un usuario cuando ya no forma parte del taller.</li>
+                <li><span class="text-slate-200 font-medium">Roles:</span> el sistema usa roles como ADMIN, MECÁNICO, RECEPCIÓN y CLIENTE.</li>
+            </ul>
+        </div>
+
+    </div>
+</div>

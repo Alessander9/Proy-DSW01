@@ -1,0 +1,75 @@
+﻿@{
+    ViewData["Title"] = "Menú de Servicios";
+}
+
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+<div class="min-h-screen bg-slate-950 flex items-center justify-center py-10 px-6">
+    <div class="w-full max-w-4xl bg-slate-900/70 border border-slate-800 rounded-2xl p-10 shadow-lg shadow-slate-900/40">
+
+        <!-- TÍTULO -->
+        <div class="text-center mb-10">
+            <h2 class="text-3xl md:text-4xl font-semibold text-slate-50 mb-3 flex justify-center items-center gap-2">
+                <span class="material-icons text-amber-400 text-4xl">build</span>
+                Gestión de Servicios
+            </h2>
+            <p class="text-slate-400 text-sm md:text-base">
+                Administra los servicios disponibles en tu taller.
+            </p>
+        </div>
+
+        <!-- GRID DE OPCIONES -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+
+            <!-- Listar Servicios -->
+            <a asp-controller="Servicio" asp-action="ListarServicios"
+               class="group bg-slate-900/60 border border-slate-700 hover:border-amber-400 rounded-2xl p-6 transition-all hover:-translate-y-1 hover:shadow-lg hover:shadow-amber-500/20">
+                <div class="flex items-center gap-3 mb-3">
+                    <span class="material-icons text-amber-400 text-4xl">list_alt</span>
+                    <h3 class="text-lg font-semibold text-slate-50">Listar Servicios</h3>
+                </div>
+                <p class="text-slate-400 text-sm">
+                    Revisa todos los servicios registrados en el sistema.
+                </p>
+            </a>
+
+            <!-- Registrar Servicio -->
+            <a asp-controller="Servicio" asp-action="Create"
+               class="group bg-slate-900/60 border border-slate-700 hover:border-emerald-400 rounded-2xl p-6 transition-all hover:-translate-y-1 hover:shadow-lg hover:shadow-emerald-500/20">
+                <div class="flex items-center gap-3 mb-3">
+                    <span class="material-icons text-emerald-400 text-4xl">add_circle</span>
+                    <h3 class="text-lg font-semibold text-slate-50">Registrar Servicio</h3>
+                </div>
+                <p class="text-slate-400 text-sm">
+                    Agrega un nuevo servicio al catálogo del taller.
+                </p>
+            </a>
+
+            <!-- Buscar Servicios -->
+            <a asp-controller="Servicio" asp-action="BuscarServicios"
+               class="group bg-slate-900/60 border border-slate-700 hover:border-sky-400 rounded-2xl p-6 transition-all hover:-translate-y-1 hover:shadow-lg hover:shadow-sky-500/20">
+                <div class="flex items-center gap-3 mb-3">
+                    <span class="material-icons text-sky-400 text-4xl">search</span>
+                    <h3 class="text-lg font-semibold text-slate-50">Buscar Servicios</h3>
+                </div>
+                <p class="text-slate-400 text-sm">
+                    Busca servicios por nombre o descripción.
+                </p>
+            </a>
+
+            <!-- Volver al Menú Principal -->
+            <a asp-controller="Home" asp-action="MenuPrincipal"
+               class="group bg-slate-900/60 border border-slate-700 hover:border-rose-400 rounded-2xl p-6 transition-all hover:-translate-y-1 hover:shadow-lg hover:shadow-rose-500/20">
+                <div class="flex items-center gap-3 mb-3">
+                    <span class="material-icons text-rose-400 text-4xl">arrow_back</span>
+                    <h3 class="text-lg font-semibold text-slate-50">Volver al Menú Principal</h3>
+                </div>
+                <p class="text-slate-400 text-sm">
+                    Regresa al panel principal del sistema.
+                </p>
+            </a>
+
+        </div>
+    </div>
+</div>
