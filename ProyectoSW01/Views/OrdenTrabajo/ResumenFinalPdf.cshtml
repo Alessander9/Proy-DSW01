@@ -1,0 +1,345 @@
+﻿@model ProyectoSW01.Models.OrdenTrabajoConDetalle
+
+@{
+    var orden = Model.Orden;
+    var detalles = Model.Detalles ?? new List<ProyectoSW01.Models.OrdenTrabajoDetalle>();
+    var repuestos = Model.Repuestos ?? new List<ProyectoSW01.Models.OrdenTrabajoRepuestoDetalle>();
+    Layout = null; // Necesario para PDF
+}
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8" />
+    <title>Orden de Trabajo @orden.OrdenId</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        body {
+            margin: 20px;
+            font-size: 12px;
+            color: #1f2933;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid #111827;
+            padding-bottom: 8px;
+            margin-bottom: 15px;
+        }
+
+        .header-left {
+            max-width: 65%;
+        }
+
+        .title {
+            font-size: 18px;
+            font-weight: bold;
+            margin: 0;
+            color: #111827;
+        }
+
+        .subtitle {
+            font-size: 11px;
+            color: #6b7280;
+            margin-top: 3px;
+        }
+
+        .header-right {
+            text-align: right;
+            font-size: 11px;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 3px 8px;
+            border-radius: 999px;
+            font-size: 10px;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        .badge-finalizado {
+            background-color: #d1fae5;
+            color: #065f46;
+            border: 1px solid #10b981;
+        }
+
+        .section {
+            border: 1px solid #e5e7eb;
+            border-radius: 6px;
+            padding: 10px;
+            margin-bottom: 12px;
+        }
+
+        .section-title {
+            font-size: 12px;
+            font-weight: bold;
+            margin: 0 0 8px 0;
+            color: #111827;
+        }
+
+        .info-grid {
+            display: table;
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .info-row {
+            display: table-row;
+        }
+
+        .info-label,
+        .info-value {
+            display: table-cell;
+            padding: 3px 4px;
+            font-size: 11px;
+        }
+
+        .info-label {
+            width: 25%;
+            font-weight: bold;
+            color: #4b5563;
+        }
+
+        .info-value {
+            width: 75%;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 6px;
+        }
+
+        thead tr {
+            background-color: #f3f4f6;
+        }
+
+        th, td {
+            border: 1px solid #e5e7eb;
+            padding: 5px;
+            font-size: 11px;
+        }
+
+        th {
+            text-align: left;
+            font-weight: bold;
+            color: #374151;
+        }
+
+            td.text-right, th.text-right {
+                text-align: right;
+            }
+
+        tfoot tr {
+            background-color: #f9fafb;
+        }
+
+        .total-label {
+            text-align: right;
+            font-size: 11px;
+            font-weight: bold;
+        }
+
+        .total-value {
+            text-align: right;
+            font-size: 12px;
+            font-weight: bold;
+            color: #047857;
+        }
+
+        .footer {
+            margin-top: 20px;
+            font-size: 10px;
+            color: #6b7280;
+            border-top: 1px solid #e5e7eb;
+            padding-top: 6px;
+        }
+
+        .signatures {
+            margin-top: 30px;
+            display: table;
+            width: 100%;
+        }
+
+        .signature-box {
+            display: table-cell;
+            width: 50%;
+            padding: 0 10px;
+            text-align: center;
+            font-size: 10px;
+        }
+
+        .signature-line {
+            border-top: 1px solid #9ca3af;
+            margin: 35px 0 4px 0;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ENCABEZADO -->
+    <div class="header">
+        <div class="header-left">
+            <h1 class="title">Orden de Trabajo N.º @orden.OrdenId</h1>
+            <p class="subtitle">Taller Mecánico · Resumen final del servicio</p>
+        </div>
+
+        <div class="header-right">
+            <span class="badge badge-finalizado">@orden.Estado</span>
+            <div style="margin-top:4px;">Fecha: @orden.Fecha.ToString("dd/MM/yyyy HH:mm")</div>
+        </div>
+    </div>
+
+    <!-- DATOS PRINCIPALES -->
+    <div class="section">
+        <p class="section-title">Datos del servicio</p>
+
+        <div class="info-grid">
+
+            <div class="info-row">
+                <div class="info-label">Cliente</div>
+                <div class="info-value">
+                    @(string.IsNullOrWhiteSpace(orden.ClienteNombreCompleto)
+                                        ? "No disponible"
+                                        : orden.ClienteNombreCompleto)
+                </div>
+            </div>
+
+            <div class="info-row">
+                <div class="info-label">Vehículo</div>
+                <div class="info-value">
+                    @orden.VehiculoDescripcion  @if (!string.IsNullOrWhiteSpace(orden.VehiculoPlaca)) {
+                    <span> · Placa: @orden.VehiculoPlaca</span>
+                                        }
+                </div>
+            </div>
+
+            <div class="info-row">
+                <div class="info-label">Mecánico</div>
+                <div class="info-value">
+                    @(string.IsNullOrWhiteSpace(orden.MecanicoNombreCompleto)
+                                        ? "No asignado"
+                                        : orden.MecanicoNombreCompleto)
+                </div>
+            </div>
+
+            <div class="info-row">
+                <div class="info-label">Observaciones</div>
+                <div class="info-value">
+                    @(string.IsNullOrWhiteSpace(orden.Observaciones)
+                                        ? "Sin observaciones adicionales."
+                                        : orden.Observaciones)
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- SERVICIOS REALIZADOS -->
+    <div class="section">
+        <p class="section-title">Servicios realizados</p>
+
+        @if (!detalles.Any())
+        {
+            <p style="font-size:11px; color:#6b7280;">No hay servicios registrados en esta orden.</p>
+        }
+        else
+        {
+            <table>
+                <thead>
+                    <tr>
+                        <th>Servicio</th>
+                        <th class="text-right">Cantidad</th>
+                        <th class="text-right">Precio</th>
+                        <th class="text-right">Subtotal</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var d in detalles)
+                    {
+                        <tr>
+                            <td>@d.ServicioNombre</td>
+                            <td class="text-right">@d.Cantidad</td>
+                            <td class="text-right">@d.Precio.ToString("C")</td>
+                            <td class="text-right">@d.Subtotal.ToString("C")</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
+    </div>
+
+    <!-- REPUESTOS UTILIZADOS -->
+    <div class="section">
+        <p class="section-title">Repuestos utilizados</p>
+
+        @if (!repuestos.Any())
+        {
+            <p style="font-size:11px; color:#6b7280;">No se utilizaron repuestos en esta orden.</p>
+        }
+        else
+        {
+            <table>
+                <thead>
+                    <tr>
+                        <th>Repuesto</th>
+                        <th class="text-right">Cantidad</th>
+                        <th class="text-right">Precio</th>
+                        <th class="text-right">Subtotal</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var r in repuestos)
+                    {
+                        <tr>
+                            <td>@r.RepuestoNombre</td>
+                            <td class="text-right">@r.Cantidad</td>
+                            <td class="text-right">@r.Precio.ToString("C")</td>
+                            <td class="text-right">@r.Subtotal.ToString("C")</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
+    </div>
+
+    <!-- TOTAL GLOBAL -->
+    <div class="section">
+        <table>
+            <tfoot>
+                <tr>
+                    <td class="total-label" colspan="3">Total de la orden (servicios + repuestos)</td>
+                    <td class="total-value">@orden.Total.ToString("C")</td>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+
+    <!-- FIRMAS -->
+    <div class="signatures">
+        <div class="signature-box">
+            <div class="signature-line"></div>
+            <div>Firma del cliente</div>
+        </div>
+        <div class="signature-box">
+            <div class="signature-line"></div>
+            <div>Firma del responsable del taller</div>
+        </div>
+    </div>
+
+    <!-- PIE DE PÁGINA -->
+    <div class="footer">
+        Este documento resume los servicios y repuestos aplicados al vehículo.
+        Con la firma del cliente se confirma la conformidad con el trabajo realizado.
+    </div>
+
+</body>
+</html>

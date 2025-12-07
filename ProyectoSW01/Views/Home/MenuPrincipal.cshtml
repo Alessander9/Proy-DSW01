@@ -1,0 +1,173 @@
+﻿@{
+    ViewData["Title"] = "Menú Principal";
+}
+
+<!-- TAILWIND CDNs -->
+<script src="https://cdn.tailwindcss.com"></script>
+
+<!-- MATERIAL ICONS -->
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+<div class="min-h-[80vh] bg-slate-950 flex items-center justify-center py-10">
+    <div class="w-full max-w-6xl px-4">
+
+        <!-- Título -->
+        <div class="text-center mb-10">
+            <h2 class="text-3xl md:text-4xl font-semibold text-slate-50 mb-3">
+                Menú Principal del Taller
+            </h2>
+            <p class="text-slate-400 text-sm md:text-base">
+                Gestiona clientes, vehículos, servicios y órdenes de trabajo desde un solo lugar.
+            </p>
+        </div>
+
+        <!-- Grid de tarjetas -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+
+            <!-- 1. Clientes -->
+            <div class="group bg-slate-900/70 border border-slate-800 rounded-2xl p-5
+                        shadow-lg shadow-slate-900/40 hover:shadow-xl hover:-translate-y-1
+                        hover:shadow-[0_0_25px_rgba(129,140,248,0.7)]
+                        transition-all duration-200">
+                <div class="flex items-center gap-2 mb-4">
+                    <span class="material-icons text-indigo-400 text-3xl">group</span>
+                    <h5 class="text-slate-50 font-semibold text-lg">Clientes</h5>
+                </div>
+                <p class="text-slate-400 text-sm mb-4">Registro y gestión de información de clientes.</p>
+                <a asp-controller="Cliente" asp-action="MenuCliente"
+                   class="inline-flex items-center gap-1 text-sm font-medium px-3 py-2 rounded-full bg-indigo-500 hover:bg-indigo-400 text-white transition-colors">
+                    Ir <span class="material-icons text-base">arrow_forward</span>
+                </a>
+            </div>
+
+            <!-- 2. Vehículos -->
+            <div class="group bg-slate-900/70 border border-slate-800 rounded-2xl p-5
+                        shadow-lg shadow-slate-900/40 hover:shadow-xl hover:-translate-y-1
+                        hover:shadow-[0_0_25px_rgba(52,211,153,0.7)]
+                        transition-all duration-200">
+                <div class="flex items-center gap-2 mb-4">
+                    <span class="material-icons text-emerald-400 text-3xl">directions_car</span>
+                    <h5 class="text-slate-50 font-semibold text-lg">Vehículos</h5>
+                </div>
+                <p class="text-slate-400 text-sm mb-4">Gestión de vehículos asociados a cada cliente.</p>
+                <a asp-controller="Vehiculo" asp-action="MenuVehiculo"
+                   class="inline-flex items-center gap-1 text-sm font-medium px-3 py-2 rounded-full bg-emerald-500 hover:bg-emerald-400 text-white transition-colors">
+                    Ir <span class="material-icons text-base">arrow_forward</span>
+                </a>
+            </div>
+
+            <!-- 3. Servicios -->
+            <div class="group bg-slate-900/70 border border-slate-800 rounded-2xl p-5
+                        shadow-lg shadow-slate-900/40 hover:shadow-xl hover:-translate-y-1
+                        hover:shadow-[0_0_25px_rgba(251,191,36,0.7)]
+                        transition-all duration-200">
+                <div class="flex items-center gap-2 mb-4">
+                    <span class="material-icons text-amber-400 text-3xl">build</span>
+                    <h5 class="text-slate-50 font-semibold text-lg">Servicios</h5>
+                </div>
+                <p class="text-slate-400 text-sm mb-4">Configura los servicios disponibles en el taller.</p>
+                <a asp-controller="Servicio" asp-action="MenuServicios"
+                   class="inline-flex items-center gap-1 text-sm font-medium px-3 py-2 rounded-full bg-amber-500 hover:bg-amber-400 text-white transition-colors">
+                    Ir <span class="material-icons text-base">arrow_forward</span>
+                </a>
+            </div>
+
+            <!-- 4. Carrito (Agregado por flujo obligatorio) 
+            <div class="group bg-slate-900/70 border border-slate-800 rounded-2xl p-5
+                        shadow-lg shadow-slate-900/40 hover:shadow-xl hover:-translate-y-1
+                        hover:shadow-[0_0_25px_rgba(244,114,182,0.7)]
+                        transition-all duration-200">
+                <div class="flex items-center gap-2 mb-4">
+                    <span class="material-icons text-pink-400 text-3xl">shopping_cart</span>
+                    <h5 class="text-slate-50 font-semibold text-lg">Plataforma </h5>
+                </div>
+                <p class="text-slate-400 text-sm mb-4">Selecciona servicios y genera la orden.</p>
+                <a asp-controller="carrito" asp-action="Index"
+                   class="inline-flex items-center gap-1 text-sm font-medium px-3 py-2 rounded-full bg-pink-500 hover:bg-pink-400 text-white transition-colors">
+                    Ir <span class="material-icons text-base">arrow_forward</span>
+                </a>
+            </div>  -->
+
+            <!-- 5. Órdenes de Trabajo -->
+            <div class="group bg-slate-900/70 border border-slate-800 rounded-2xl p-5
+                        shadow-lg shadow-slate-900/40 hover:shadow-xl hover:-translate-y-1
+                        hover:shadow-[0_0_25px_rgba(56,189,248,0.7)]
+                        transition-all duration-200">
+                <div class="flex items-center gap-2 mb-4">
+                    <span class="material-icons text-sky-400 text-3xl">assignment</span>
+                    <h5 class="text-slate-50 font-semibold text-lg">Órdenes de Trabajo</h5>
+                </div>
+                <p class="text-slate-400 text-sm mb-4">Control del estado y detalle de cada trabajo.</p>
+                <a asp-controller="OrdenTrabajo" asp-action="Index"
+                   class="inline-flex items-center gap-1 text-sm font-medium px-3 py-2 rounded-full bg-sky-500 hover:bg-sky-400 text-white transition-colors">
+                    Ir <span class="material-icons text-base">arrow_forward</span>
+                </a>
+            </div>
+
+            <!-- 6. Mantenimientos -->
+            <div class="group bg-slate-900/70 border border-slate-800 rounded-2xl p-5
+                        shadow-lg shadow-slate-900/40 hover:shadow-xl hover:-translate-y-1
+                        hover:shadow-[0_0_25px_rgba(190,242,100,0.7)]
+                        transition-all duration-200">
+                <div class="flex items-center gap-2 mb-4">
+                    <span class="material-icons text-lime-400 text-3xl">engineering</span>
+                    <h5 class="text-slate-50 font-semibold text-lg">Mantenimientos</h5>
+                </div>
+                <p class="text-slate-400 text-sm mb-4">Historial de trabajos realizados a vehículos.</p>
+                <a asp-controller="Mantenimiento" asp-action="MenuMantenimiento"
+                   class="inline-flex items-center gap-1 text-sm font-medium px-3 py-2 rounded-full bg-lime-500 hover:bg-lime-400 text-white transition-colors">
+                    Ir <span class="material-icons text-base">arrow_forward</span>
+                </a>
+            </div>
+
+            <!-- 7. Repuestos -->
+            <div class="group bg-slate-900/70 border border-slate-800 rounded-2xl p-5
+                        shadow-lg shadow-slate-900/40 hover:shadow-xl hover:-translate-y-1
+                        hover:shadow-[0_0_25px_rgba(251,146,60,0.7)]
+                        transition-all duration-200">
+                <div class="flex items-center gap-2 mb-4">
+                    <span class="material-icons text-orange-400 text-3xl">inventory_2</span>
+                    <h5 class="text-slate-50 font-semibold text-lg">Repuestos</h5>
+                </div>
+                <p class="text-slate-400 text-sm mb-4">Gestión del inventario del taller.</p>
+                <a asp-controller="Repuesto" asp-action="MenuRepuestos"
+                   class="inline-flex items-center gap-1 text-sm font-medium px-3 py-2 rounded-full bg-orange-500 hover:bg-orange-400 text-white transition-colors">
+                    Ir <span class="material-icons text-base">arrow_forward</span>
+                </a>
+            </div>
+
+            <!-- 8. Usuarios -->
+            <div class="group bg-slate-900/70 border border-slate-800 rounded-2xl p-5
+                        shadow-lg shadow-slate-900/40 hover:shadow-xl hover:-translate-y-1
+                        hover:shadow-[0_0_25px_rgba(244,63,94,0.7)]
+                        transition-all duration-200">
+                <div class="flex items-center gap-2 mb-4">
+                    <span class="material-icons text-rose-400 text-3xl">group</span>
+                    <h5 class="text-slate-50 font-semibold text-lg">Usuarios</h5>
+                </div>
+                <p class="text-slate-400 text-sm mb-4">Gestión del personal del sistema.</p>
+                <a asp-controller="Usuario" asp-action="MenuUsuario"
+                   class="inline-flex items-center gap-1 text-sm font-medium px-3 py-2 rounded-full bg-rose-500 hover:bg-rose-400 text-white transition-colors">
+                    Ir <span class="material-icons text-base">arrow_forward</span>
+                </a>
+            </div>
+
+            <!-- 9. Administración -->
+            <div class="group bg-slate-900/70 border border-slate-800 rounded-2xl p-5
+                        shadow-lg shadow-slate-900/40 hover:shadow-xl hover:-translate-y-1
+                        hover:shadow-[0_0_25px_rgba(244,63,94,0.7)]
+                        transition-all duration-200">
+                <div class="flex items-center gap-2 mb-4">
+                    <span class="material-icons text-rose-400 text-3xl">admin_panel_settings</span>
+                    <h5 class="text-slate-50 font-semibold text-lg">Analiticas</h5>
+                </div>
+                <p class="text-slate-400 text-sm mb-4">Gestión de roles y usuarios del sistema.</p>
+                <a asp-controller="Usuario" asp-action="Index"
+                   class="inline-flex items-center gap-1 text-sm font-medium px-3 py-2 rounded-full bg-pink-500 hover:bg-rose-400 text-white transition-colors">
+                    Ir <span class="material-icons text-base">arrow_forward</span>
+                </a>
+            </div>
+
+        </div>
+    </div>
+</div>

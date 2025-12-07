@@ -1,0 +1,131 @@
+﻿@{
+    ViewData["Title"] = "Menú de Vehículos";
+}
+
+<!-- TAILWIND (borra esto si ya está en _Layout) -->
+<script src="https://cdn.tailwindcss.com"></script>
+
+<!-- MATERIAL ICONS -->
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+<div class="min-h-[80vh] bg-slate-950 flex items-center justify-center py-10">
+    <div class="w-full max-w-5xl px-4">
+        <!-- Título -->
+        <div class="flex items-center justify-between mb-8">
+            <div>
+                <h2 class="text-3xl md:text-4xl font-semibold text-slate-50 mb-2 flex items-center gap-2">
+                    <span class="material-icons text-emerald-400 text-4xl">
+                        directions_car
+                    </span>
+                    Menú de Vehículos
+                </h2>
+                <p class="text-slate-400 text-sm md:text-base">
+                    Gestiona los vehículos registrados en el taller: altas, consultas y relación con los clientes.
+                </p>
+            </div>
+
+            <!-- Volver al menú principal -->
+            <div>
+                <a asp-controller="Home" asp-action="MenuPrincipal"
+                   class="inline-flex items-center gap-1 px-4 py-2 rounded-full text-sm font-medium bg-slate-800 hover:bg-slate-700 text-slate-100 border border-slate-700 transition-colors">
+                    <span class="material-icons text-base">
+                        arrow_back
+                    </span>
+                    Volver al menú principal
+                </a>
+            </div>
+        </div>
+
+        <!-- Grid de opciones -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+
+            <!-- Listar vehículos -->
+            <div class="group bg-slate-900/70 border border-slate-800 rounded-2xl p-5 shadow-lg shadow-slate-900/40 hover:shadow-xl hover:-translate-y-1 transition-all duration-200">
+                <div class="flex items-center gap-2 mb-3">
+                    <span class="material-icons text-emerald-400 text-3xl">
+                        list_alt
+                    </span>
+                    <h3 class="text-slate-50 font-semibold text-lg">
+                        Listar vehículos
+                    </h3>
+                </div>
+                <p class="text-slate-400 text-sm mb-4">
+                    Visualiza el listado completo de vehículos registrados. Desde la tabla podrás ver detalles,
+                    editar información o eliminar vehículos si es necesario.
+                </p>
+                <a asp-controller="Vehiculo" asp-action="ListarVehiculos"
+                   class="inline-flex items-center gap-1 text-sm font-medium px-3 py-2 rounded-full bg-emerald-500 hover:bg-emerald-400 text-white transition-colors">
+                    Ir al listado
+                    <span class="material-icons text-base">
+                        arrow_forward
+                    </span>
+                </a>
+            </div>
+
+            <!-- Registrar nuevo vehículo -->
+            <div class="group bg-slate-900/70 border border-slate-800 rounded-2xl p-5 shadow-lg shadow-slate-900/40 hover:shadow-xl hover:-translate-y-1 transition-all duration-200">
+                <div class="flex items-center gap-2 mb-3">
+                    <span class="material-icons text-sky-400 text-3xl">
+                        add_circle
+                    </span>
+                    <h3 class="text-slate-50 font-semibold text-lg">
+                        Registrar vehículo
+                    </h3>
+                </div>
+                <p class="text-slate-400 text-sm mb-4">
+                    Da de alta un nuevo vehículo, asociándolo a un cliente y registrando sus datos principales
+                    (marca, modelo, placa, año, etc.).
+                </p>
+                <a asp-controller="Vehiculo" asp-action="Create"
+                   class="inline-flex items-center gap-1 text-sm font-medium px-3 py-2 rounded-full bg-sky-500 hover:bg-sky-400 text-white transition-colors">
+                    Nuevo vehículo
+                    <span class="material-icons text-base">
+                        add
+                    </span>
+                </a>
+            </div>
+
+            <!-- Vehículos por cliente (si tienes algo así en tu Index o acción especial) -->
+            <div class="group bg-slate-900/70 border border-slate-800 rounded-2xl p-5 shadow-lg shadow-slate-900/40 hover:shadow-xl hover:-translate-y-1 transition-all duration-200">
+                <div class="flex items-center gap-2 mb-3">
+                    <span class="material-icons text-amber-400 text-3xl">
+                        person_search
+                    </span>
+                    <h3 class="text-slate-50 font-semibold text-lg">
+                        Vehículos por cliente
+                    </h3>
+                </div>
+                <p class="text-slate-400 text-sm mb-4">
+                    Consulta los vehículos asociados a cada cliente. Ideal para ver el historial de atención de un cliente.
+                </p>
+                <!-- Si tienes una acción específica para esto, cámbiala aquí -->
+                <a asp-controller="Vehiculo" asp-action="BuscarVehiculos"
+                   class="inline-flex items-center gap-1 text-sm font-medium px-3 py-2 rounded-full bg-amber-500 hover:bg-amber-400 text-white transition-colors">
+                    Ver vehículos
+                    <span class="material-icons text-base">
+                        search
+                    </span>
+                </a>
+            </div>
+
+        </div>
+
+        <!-- Sección informativa -->
+        <div class="mt-10 bg-slate-900/60 border border-slate-800 rounded-2xl p-5">
+            <h4 class="text-slate-100 font-semibold mb-3 flex items-center gap-2 text-base md:text-lg">
+                <span class="material-icons text-lime-400">
+                    info
+                </span>
+                Acciones disponibles sobre un vehículo
+            </h4>
+            <ul class="list-disc list-inside text-slate-400 text-sm space-y-1">
+                <li><span class="font-medium text-slate-200">Registrar:</span> crear un nuevo vehículo asociado a un cliente.</li>
+                <li><span class="font-medium text-slate-200">Listar:</span> ver todos los vehículos registrados en el sistema.</li>
+                <li><span class="font-medium text-slate-200">Ver detalle:</span> consultar la información completa de un vehículo específico.</li>
+                <li><span class="font-medium text-slate-200">Editar:</span> actualizar datos como placa, modelo, año, etc.</li>
+                <li><span class="font-medium text-slate-200">Eliminar:</span> dar de baja un vehículo del sistema si ya no debe registrarse.</li>
+                <li><span class="font-medium text-slate-200">Relación con otros módulos:</span> los vehículos se vinculan a diagnósticos, mantenimientos y órdenes de trabajo.</li>
+            </ul>
+        </div>
+    </div>
+</div>
