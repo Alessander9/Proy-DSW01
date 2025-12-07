@@ -1,0 +1,207 @@
+﻿@model ProyectoSW01.Models.OrdenTrabajoConDetalle
+
+@{
+    Layout = null;
+    var orden = Model.Orden;
+    var detalles = Model.Detalles ?? new List<ProyectoSW01.Models.OrdenTrabajoDetalle>();
+    var total = orden.Total;
+}
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8" />
+    <title>Orden de Trabajo #@orden.OrdenId</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,0,0" />
+
+    <style>
+        .material-symbols-rounded {
+            font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body class="min-h-screen bg-slate-50 font-sans py-10 px-4 sm:px-6 lg:px-8">
+
+    <div class="max-w-4xl mx-auto mb-6">
+        <nav class="flex text-sm text-slate-500 hover:text-slate-700 transition-colors">
+            <a asp-action="Index" class="flex items-center gap-1">
+                <span class="material-symbols-rounded text-lg">arrow_back</span>
+                Volver al listado de órdenes
+            </a>
+        </nav>
+    </div>
+
+    <div class="max-w-4xl mx-auto bg-white rounded-3xl shadow-xl shadow-slate-200/50 border border-slate-100 overflow-hidden">
+
+        <div class="bg-gradient-to-r from-slate-900 to-slate-800 p-8 text-white flex justify-between items-start">
+            <div>
+                <h1 class="text-3xl font-bold flex items-center gap-3">
+                    <span class="material-symbols-rounded text-emerald-400 text-4xl">build_circle</span>
+                    Orden de Trabajo
+                </h1>
+                <p class="text-slate-400 mt-2 text-sm">Detalle de servicios y costos asociados</p>
+            </div>
+
+            <div class="bg-white/10 backdrop-blur-md border border-white/20 rounded-lg px-4 py-2 text-center">
+                <span class="block text-xs text-slate-400 uppercase tracking-wider">N° Orden</span>
+                <span class="font-mono text-lg font-bold">#@orden.OrdenId</span>
+            </div>
+        </div>
+
+        <div class="p-8">
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
+
+                <div class="md:col-span-2 flex items-center justify-between bg-slate-50 p-4 rounded-2xl border border-slate-100">
+                    <span class="text-sm font-bold text-slate-500 uppercase tracking-wide flex items-center gap-2">
+                        <span class="material-symbols-rounded text-lg">flag</span>
+                        Estado Actual
+                    </span>
+
+                    <span class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-sm font-bold border capitalize shadow-sm
+                        @(
+                                                      orden.Estado == "pendiente" ? "bg-amber-50 text-amber-700 border-amber-200" :
+                                                      orden.Estado == "en_proceso" ? "bg-blue-50 text-blue-700 border-blue-200" :
+                                                      orden.Estado == "entregado" ? "bg-emerald-50 text-emerald-700 border-emerald-200" :
+                                                      orden.Estado == "cancelado" ? "bg-rose-50 text-rose-700 border-rose-200" :
+                                                      "bg-slate-100 text-slate-700 border-slate-200"
+                                                )">
+                        <span class="relative flex h-2 w-2">
+                            <span class="animate-ping absolute inline-flex h-full w-full rounded-full opacity-75 currentColor"></span>
+                            <span class="relative inline-flex rounded-full h-2 w-2 currentColor"></span>
+                        </span>
+                        @orden.Estado.Replace("_", " ")
+                    </span>
+                </div>
+
+                <div class="space-y-4">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-full bg-slate-100 flex items-center justify-center text-slate-500">
+                            <span class="material-symbols-rounded">directions_car</span>
+                        </div>
+                        <div>
+                            <p class="text-xs text-slate-500 font-semibold uppercase">Vehículo ID</p>
+                            <p class="font-bold text-slate-800">#@orden.VehiculoId</p>
+                        </div>
+                    </div>
+
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-full bg-slate-100 flex items-center justify-center text-slate-500">
+                            <span class="material-symbols-rounded">engineering</span>
+                        </div>
+                        <div>
+                            <p class="text-xs text-slate-500 font-semibold uppercase">Mecánico ID</p>
+                            <p class="font-bold text-slate-800">#@orden.MecanicoId</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="space-y-4">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-full bg-slate-100 flex items-center justify-center text-slate-500">
+                            <span class="material-symbols-rounded">event</span>
+                        </div>
+                        <div>
+                            <p class="text-xs text-slate-500 font-semibold uppercase">Fecha de Creación</p>
+                            <p class="font-medium text-slate-800">@orden.Fecha.ToString("dd/MM/yyyy HH:mm")</p>
+                        </div>
+                    </div>
+
+                    @if (!string.IsNullOrWhiteSpace(orden.Observaciones))
+                    {
+                        <div class="flex items-start gap-3">
+                            <div class="w-10 h-10 rounded-full bg-slate-100 flex items-center justify-center text-slate-500 shrink-0">
+                                <span class="material-symbols-rounded">comment</span>
+                            </div>
+                            <div>
+                                <p class="text-xs text-slate-500 font-semibold uppercase">Observaciones</p>
+                                <p class="text-sm text-slate-700 bg-yellow-50 px-2 py-1 rounded border border-yellow-100 mt-1">
+                                    @orden.Observaciones
+                                </p>
+                            </div>
+                        </div>
+                    }
+                </div>
+
+            </div>
+
+            <div class="border-t border-slate-100 pt-8">
+                <h3 class="flex items-center gap-2 text-lg font-bold text-slate-800 mb-6">
+                    <span class="material-symbols-rounded text-indigo-500">home_repair_service</span>
+                    Servicios Realizados
+                    <span class="ml-2 bg-indigo-50 text-indigo-600 text-xs px-2 py-1 rounded-full border border-indigo-100 font-medium">
+                        @detalles.Count items
+                    </span>
+                </h3>
+
+                @if (!detalles.Any())
+                {
+                    <div class="text-center py-10 bg-slate-50 rounded-2xl border border-dashed border-slate-300">
+                        <span class="material-symbols-rounded text-4xl text-slate-300 mb-2">assignment_off</span>
+                        <p class="text-slate-500">No hay servicios registrados en esta orden.</p>
+                    </div>
+                }
+                else
+                {
+                    <div class="overflow-hidden rounded-2xl border border-slate-200">
+                        <table class="min-w-full divide-y divide-slate-200">
+                            <thead class="bg-slate-50">
+                                <tr>
+                                    <th scope="col" class="px-6 py-4 text-left text-xs font-bold text-slate-500 uppercase tracking-wider">Servicio</th>
+                                    <th scope="col" class="px-6 py-4 text-right text-xs font-bold text-slate-500 uppercase tracking-wider">Cant.</th>
+                                    <th scope="col" class="px-6 py-4 text-right text-xs font-bold text-slate-500 uppercase tracking-wider">Precio Unit.</th>
+                                    <th scope="col" class="px-6 py-4 text-right text-xs font-bold text-slate-500 uppercase tracking-wider">Subtotal</th>
+                                </tr>
+                            </thead>
+                            <tbody class="bg-white divide-y divide-slate-200">
+                                @foreach (var d in detalles)
+                                {
+                                    <tr class="hover:bg-slate-50 transition-colors">
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <div class="flex items-center gap-3">
+                                                <span class="material-symbols-rounded text-emerald-500">check_circle</span>
+                                                <span class="text-sm font-medium text-slate-900">@d.ServicioNombre</span>
+                                            </div>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-right text-sm text-slate-600">@d.Cantidad</td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-right text-sm text-slate-600">@d.Precio.ToString("C")</td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-bold text-slate-800">@d.Subtotal.ToString("C")</td>
+                                    </tr>
+                                }
+                            </tbody>
+                            <tfoot class="bg-slate-50">
+                                <tr>
+                                    <td colspan="3" class="px-6 py-4 text-right text-sm font-bold text-slate-600 uppercase tracking-wide">Total a Pagar</td>
+                                    <td class="px-6 py-4 text-right">
+                                        <span class="text-xl font-bold text-emerald-600">@total.ToString("C")</span>
+                                    </td>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                }
+            </div>
+
+            <div class="mt-8 pt-6 border-t border-slate-100 flex flex-col sm:flex-row justify-end gap-4">
+                <a asp-action="Index"
+                   class="px-6 py-3 rounded-xl border border-slate-200 text-slate-600 font-medium hover:bg-slate-50 hover:text-slate-800 transition-colors text-center">
+                    Volver al listado
+                </a>
+
+                <a asp-action="Edit" asp-route-id="@orden.OrdenId"
+                   class="inline-flex items-center justify-center gap-2 px-8 py-3 bg-emerald-600 text-white rounded-xl shadow-lg shadow-emerald-200 hover:bg-emerald-700 hover:shadow-emerald-300 transition-all transform active:scale-95 font-medium">
+                    <span class="material-symbols-rounded text-sm">edit</span>
+                    Editar Orden
+                </a>
+            </div>
+
+        </div>
+    </div>
+    </div>
+
+</body>
+</html>

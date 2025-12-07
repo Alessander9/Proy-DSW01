@@ -1,0 +1,103 @@
+﻿@model ProyectoSW01.Models.Repuesto
+
+@{
+    ViewData["Title"] = "Editar Repuesto";
+}
+
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com"></script>
+
+<!-- Material Icons -->
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+
+<div class="max-w-3xl mx-auto px-4 py-8">
+
+    <h1 class="text-3xl font-bold text-gray-800 flex items-center gap-2 mb-6">
+        <span class="material-icons text-blue-700">edit</span>
+        Editar Repuesto
+    </h1>
+
+    <div class="bg-white shadow rounded-xl p-6">
+        <form asp-action="Edit" method="post">
+            @Html.AntiForgeryToken()
+
+            <!-- ID oculto -->
+            <input asp-for="RepuestoId" type="hidden" />
+
+            <div asp-validation-summary="ModelOnly"
+                 class="mb-4 p-3 rounded bg-red-100 text-red-700 text-sm"></div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+
+                <!-- Nombre -->
+                <div>
+                    <label asp-for="Nombre"
+                           class="block text-sm font-semibold text-blue-900 mb-1 flex items-center gap-1">
+                        <span class="material-icons text-sm">label</span>
+                        Nombre del repuesto
+                    </label>
+                    <input asp-for="Nombre"
+                           class="w-full rounded-lg border-gray-300 text-sm focus:ring-2 focus:ring-blue-600 focus:border-blue-600" />
+                    <span asp-validation-for="Nombre" class="text-xs text-red-600"></span>
+                </div>
+
+                <!-- Precio -->
+                <div>
+                    <label asp-for="Precio"
+                           class="block text-sm font-semibold text-blue-900 mb-1 flex items-center gap-1">
+                        <span class="material-icons text-sm">paid</span>
+                        Precio
+                    </label>
+                    <input asp-for="Precio" type="number" step="0.01"
+                           class="w-full rounded-lg border-gray-300 text-sm focus:ring-2 focus:ring-blue-600 focus:border-blue-600" />
+                    <span asp-validation-for="Precio" class="text-xs text-red-600"></span>
+                </div>
+
+                <!-- Stock -->
+                <div>
+                    <label asp-for="Stock"
+                           class="block text-sm font-semibold text-blue-900 mb-1 flex items-center gap-1">
+                        <span class="material-icons text-sm">inventory_2</span>
+                        Stock
+                    </label>
+                    <input asp-for="Stock" type="number" min="0"
+                           class="w-full rounded-lg border-gray-300 text-sm focus:ring-2 focus:ring-blue-600 focus:border-blue-600" />
+                    <span asp-validation-for="Stock" class="text-xs text-red-600"></span>
+                </div>
+
+                <!-- Descripción -->
+                <div class="md:col-span-2">
+                    <label asp-for="Descripcion"
+                           class="block text-sm font-semibold text-blue-900 mb-1 flex items-center gap-1">
+                        <span class="material-icons text-sm">description</span>
+                        Descripción
+                    </label>
+                    <textarea asp-for="Descripcion" rows="3"
+                              class="w-full rounded-lg border-gray-300 text-sm focus:ring-2 focus:ring-blue-600 focus:border-blue-600"></textarea>
+                    <span asp-validation-for="Descripcion" class="text-xs text-red-600"></span>
+                </div>
+
+            </div>
+
+            <!-- Botones -->
+            <div class="mt-6 flex justify-end gap-3">
+                <a asp-action="ListarRepuestos"
+                   class="inline-flex items-center px-4 py-2 bg-gray-300 text-gray-800 rounded-lg hover:bg-gray-400 transition">
+                    <span class="material-icons text-sm mr-1">arrow_back</span>
+                    Volver
+                </a>
+                <button type="submit"
+                        class="inline-flex items-center px-4 py-2 bg-blue-700 text-white rounded-lg hover:bg-blue-800 transition">
+                    <span class="material-icons text-sm mr-1">save</span>
+                    Guardar cambios
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

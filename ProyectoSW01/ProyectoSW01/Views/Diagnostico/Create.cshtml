@@ -1,0 +1,140 @@
+﻿@model ProyectoSW01.Models.Diagnostico
+@using Microsoft.AspNetCore.Mvc.Rendering
+
+@{
+}
+
+<!-- Tailwind CDN -->
+<script src="https://cdn.tailwindcss.com"></script>
+
+<!-- Material Icons CDN -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,0,0" />
+
+<style>
+    .material-symbols-rounded {
+        font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+    }
+</style>
+
+<div class="min-h-screen bg-slate-50 py-10 px-4 sm:px-6 lg:px-8 font-sans">
+
+    <div class="max-w-4xl mx-auto mb-6">
+        <nav class="flex text-sm text-slate-500 hover:text-slate-700 transition-colors">
+            <a asp-action="ListarDiagnosticos" class="flex items-center gap-1">
+                <span class="material-symbols-rounded text-lg">arrow_back</span>
+                Cancelar y volver al listado
+            </a>
+        </nav>
+    </div>
+
+    <div class="max-w-4xl mx-auto bg-white rounded-3xl shadow-xl shadow-slate-200/50 border border-slate-100 overflow-hidden">
+
+        <div class="bg-gradient-to-r from-slate-900 to-slate-800 p-8 text-white flex justify-between items-center">
+            <div>
+                <h1 class="text-3xl font-bold flex items-center gap-3">
+                    <span class="material-symbols-rounded text-blue-400">add_task</span>
+                    Nuevo Diagnóstico
+                </h1>
+                <p class="text-slate-400 mt-2 text-sm">Complete el formulario para registrar un nuevo reporte técnico.</p>
+            </div>
+
+            <div class="hidden sm:flex bg-white/10 backdrop-blur-md border border-white/20 rounded-full p-3">
+                <span class="material-symbols-rounded text-2xl text-blue-400">playlist_add</span>
+            </div>
+        </div>
+
+        <div class="p-8">
+            <form asp-action="Create" method="post" class="space-y-8">
+                @Html.AntiForgeryToken()
+
+                <div asp-validation-summary="ModelOnly" class="rounded-xl bg-red-50 border border-red-100 p-4 text-red-600 text-sm flex items-center gap-2">
+                    <span class="material-symbols-rounded">error_outline</span>
+                    <span>Por favor corrija los errores a continuación.</span>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+
+                    <div class="group">
+                        <label asp-for="VehiculoId" class="flex items-center gap-2 text-xs font-bold text-slate-500 uppercase tracking-wide mb-2">
+                            <span class="material-symbols-rounded text-slate-400 text-base">directions_car</span>
+                            Vehículo
+                        </label>
+                        <div class="relative">
+                            <select asp-for="VehiculoId"
+                                    asp-items="@(ViewBag.Vehiculos as List<SelectListItem>)"
+                                    class="w-full bg-slate-50 border border-slate-200 text-slate-800 text-sm rounded-xl px-4 py-3.5 focus:outline-none focus:bg-white focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all appearance-none cursor-pointer hover:border-blue-300">
+                                <option value="">-- Seleccione un vehículo --</option>
+                            </select>
+                            <span class="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-slate-400 material-symbols-rounded">expand_more</span>
+                        </div>
+                        <span asp-validation-for="VehiculoId" class="text-xs text-red-500 mt-1 block"></span>
+                    </div>
+
+                    <div class="group">
+                        <label asp-for="MecanicoId" class="flex items-center gap-2 text-xs font-bold text-slate-500 uppercase tracking-wide mb-2">
+                            <span class="material-symbols-rounded text-slate-400 text-base">engineering</span>
+                            Mecánico Asignado
+                        </label>
+                        <div class="relative">
+                            <select asp-for="MecanicoId"
+                                    asp-items="@(ViewBag.Mecanicos as List<SelectListItem>)"
+                                    class="w-full bg-slate-50 border border-slate-200 text-slate-800 text-sm rounded-xl px-4 py-3.5 focus:outline-none focus:bg-white focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 transition-all appearance-none cursor-pointer hover:border-emerald-300">
+                                <option value="">-- Seleccione un mecánico --</option>
+                            </select>
+                            <span class="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-slate-400 material-symbols-rounded">expand_more</span>
+                        </div>
+                        <span asp-validation-for="MecanicoId" class="text-xs text-red-500 mt-1 block"></span>
+                    </div>
+
+                    <div class="group md:col-span-2">
+                        <label asp-for="Estado" class="flex items-center gap-2 text-xs font-bold text-slate-500 uppercase tracking-wide mb-2">
+                            <span class="material-symbols-rounded text-slate-400 text-base">flag</span>
+                            Estado Inicial
+                        </label>
+                        <div class="relative">
+                            <select asp-for="Estado"
+                                    asp-items="@(ViewBag.Estados as List<SelectListItem>)"
+                                    class="w-full bg-slate-50 border border-slate-200 text-slate-800 text-sm rounded-xl px-4 py-3.5 focus:outline-none focus:bg-white focus:ring-2 focus:ring-amber-500/20 focus:border-amber-500 transition-all appearance-none cursor-pointer hover:border-amber-300">
+                                <option value="">-- Seleccione el estado actual --</option>
+                            </select>
+                            <span class="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-slate-400 material-symbols-rounded">expand_more</span>
+                        </div>
+                        <span asp-validation-for="Estado" class="text-xs text-red-500 mt-1 block"></span>
+                    </div>
+
+                    <div class="group md:col-span-2">
+                        <label asp-for="Descripcion" class="flex items-center gap-2 text-xs font-bold text-slate-500 uppercase tracking-wide mb-2">
+                            <span class="material-symbols-rounded text-slate-400 text-base">description</span>
+                            Descripción del Problema
+                        </label>
+                        <textarea asp-for="Descripcion" rows="4"
+                                  class="w-full bg-slate-50 border border-slate-200 text-slate-800 text-sm rounded-xl px-4 py-3 focus:outline-none focus:bg-white focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all placeholder:text-slate-400"
+                                  placeholder="Detalle aquí las fallas reportadas o el trabajo a realizar..."></textarea>
+                        <span asp-validation-for="Descripcion" class="text-xs text-red-500 mt-1 block"></span>
+                    </div>
+
+                </div>
+
+                <div class="pt-6 border-t border-slate-100 flex flex-col sm:flex-row justify-end gap-4">
+                    <a asp-action="ListarDiagnosticos"
+                       class="px-6 py-3 rounded-xl border border-slate-200 text-slate-600 font-medium hover:bg-slate-50 hover:text-slate-800 transition-colors text-center">
+                        Cancelar
+                    </a>
+
+                    <button type="submit"
+                            class="inline-flex items-center justify-center gap-2 px-8 py-3 bg-blue-600 text-white rounded-xl shadow-lg shadow-blue-200 hover:bg-blue-700 hover:shadow-blue-300 transition-all transform active:scale-95 font-medium">
+                        <span class="material-symbols-rounded text-sm">save</span>
+                        Guardar Diagnóstico
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
+}

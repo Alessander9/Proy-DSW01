@@ -1,0 +1,134 @@
+﻿@{
+    ViewData["Title"] = "Menú de Clientes";
+}
+
+<!-- TAILWIND -->
+<script src="https://cdn.tailwindcss.com"></script>
+
+<!-- MATERIAL ICONS -->
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+<div class="min-h-[80vh] bg-slate-950 flex items-center justify-center py-10">
+    <div class="w-full max-w-5xl px-4">
+        <!-- Título -->
+        <div class="flex items-center justify-between mb-8">
+            <div>
+                <h2 class="text-3xl md:text-4xl font-semibold text-slate-50 mb-2 flex items-center gap-2">
+                    <span class="material-icons text-indigo-400 text-4xl">
+                        group
+                    </span>
+                    Menú de Clientes
+                </h2>
+                <p class="text-slate-400 text-sm md:text-base">
+                    Desde aquí puedes gestionar el ciclo completo de tus clientes: registro, consulta, actualización y baja.
+                </p>
+            </div>
+
+            <!-- Volver al menú principal -->
+            <div>
+                <a asp-controller="Home" asp-action="MenuPrincipal"
+                   class="inline-flex items-center gap-1 px-4 py-2 rounded-full text-sm font-medium bg-slate-800 hover:bg-slate-700 text-slate-100 border border-slate-700 transition-colors">
+                    <span class="material-icons text-base">
+                        arrow_back
+                    </span>
+                    Volver al menú principal
+                </a>
+            </div>
+        </div>
+
+        <!-- Grid de opciones -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+
+            <!-- Gestión general de clientes (listar / detalles / editar / eliminar) -->
+            <div class="group bg-slate-900/70 border border-slate-800 rounded-2xl p-5 shadow-lg shadow-slate-900/40 hover:shadow-xl hover:-translate-y-1 transition-all duration-200">
+                <div class="flex items-center gap-2 mb-3">
+                    <span class="material-icons text-indigo-400 text-3xl">
+                        list_alt
+                    </span>
+                    <h3 class="text-slate-50 font-semibold text-lg">
+                        Listar clientes
+                    </h3>
+                </div>
+                <p class="text-slate-400 text-sm mb-4">
+                    Visualiza el listado completo de clientes registrados. Desde la tabla podrás ver detalles,
+                    editar información o eliminar registros cuando sea necesario.
+                </p>
+                <a asp-controller="Cliente" asp-action="ListarClientes"
+                   class="inline-flex items-center gap-1 text-sm font-medium px-3 py-2 rounded-full bg-indigo-500 hover:bg-indigo-400 text-white transition-colors">
+                    Ir al listado
+                    <span class="material-icons text-base">
+                        arrow_forward
+                    </span>
+                </a>
+            </div>
+
+            <!-- Registrar nuevo cliente -->
+            <div class="group bg-slate-900/70 border border-slate-800 rounded-2xl p-5 shadow-lg shadow-slate-900/40 hover:shadow-xl hover:-translate-y-1 transition-all duration-200">
+                <div class="flex items-center gap-2 mb-3">
+                    <span class="material-icons text-emerald-400 text-3xl">
+                        person_add
+                    </span>
+                    <h3 class="text-slate-50 font-semibold text-lg">
+                        Registrar cliente
+                    </h3>
+                </div>
+                <p class="text-slate-400 text-sm mb-4">
+                    Crea un nuevo cliente registrando sus datos personales, contacto y documento de identidad.
+                    Ideal para nuevos clientes que llegan al taller por primera vez.
+                </p>
+                <a asp-controller="Cliente" asp-action="Create"
+                   class="inline-flex items-center gap-1 text-sm font-medium px-3 py-2 rounded-full bg-emerald-500 hover:bg-emerald-400 text-white transition-colors">
+                    Nuevo cliente
+                    <span class="material-icons text-base">
+                        person_add_alt
+                    </span>
+                </a>
+            </div>
+
+            <!-- Búsqueda / filtros (se apoya en Index con buscador si lo tienes) -->
+            <div class="group bg-slate-900/70 border border-slate-800 rounded-2xl p-5 shadow-lg shadow-slate-900/40 hover:shadow-xl hover:-translate-y-1 transition-all duration-200">
+                <div class="flex items-center gap-2 mb-3">
+                    <span class="material-icons text-amber-400 text-3xl">
+                        search
+                    </span>
+                    <h3 class="text-slate-50 font-semibold text-lg">
+                        Buscar clientes
+                    </h3>
+                </div>
+                <p class="text-slate-400 text-sm mb-4">
+                    Accede al listado de clientes para aplicar filtros por nombre, DNI u otros criterios
+                    (según el buscador que tengas implementado en la vista de listado).
+                </p>
+                <a asp-controller="Cliente" asp-action="BuscarClientes"
+                   class="inline-flex items-center gap-1 text-sm font-medium px-3 py-2 rounded-full bg-amber-500 hover:bg-amber-400 text-white transition-colors">
+                    Ir a búsqueda
+                    <span class="material-icons text-base">
+                        manage_search
+                    </span>
+                </a>
+            </div>
+
+        </div>
+
+        <!-- Sección informativa de acciones disponibles -->
+        <div class="mt-10 bg-slate-900/60 border border-slate-800 rounded-2xl p-5">
+            <h4 class="text-slate-100 font-semibold mb-3 flex items-center gap-2 text-base md:text-lg">
+                <span class="material-icons text-sky-400">
+                    info
+                </span>
+                Acciones disponibles sobre un cliente
+            </h4>
+            <ul class="list-disc list-inside text-slate-400 text-sm space-y-1">
+                <li><span class="font-medium text-slate-200">Registrar:</span> crear un nuevo cliente con todos sus datos básicos.</li>
+                <li><span class="font-medium text-slate-200">Listar:</span> ver todos los clientes registrados en el sistema.</li>
+                <li><span class="font-medium text-slate-200">Ver detalle:</span> consultar la información completa de un cliente específico.</li>
+                <li><span class="font-medium text-slate-200">Editar:</span> actualizar datos de contacto, dirección u otra información relevante.</li>
+                <li><span class="font-medium text-slate-200">Eliminar:</span> dar de baja a un cliente cuando ya no debe figurar en el sistema.</li>
+                <li>
+                    <span class="font-medium text-slate-200">Relación con otros módulos:</span> desde otros módulos (vehículos, órdenes, mantenimientos)
+                    podrás ver información relacionada al cliente.
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>

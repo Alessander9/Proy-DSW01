@@ -1,0 +1,233 @@
+﻿@model ProyectoSW01.Models.OrdenTrabajoConDetalle
+
+@{
+    var orden = Model.Orden;
+    var detalles = Model.Detalles ?? new List<ProyectoSW01.Models.OrdenTrabajoDetalle>();
+}
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8" />
+    <title>Resumen final de la orden</title>
+
+    <!-- Tailwind CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Material Icons -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+
+    <!-- SweetAlert2 -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+</head>
+<body class="min-h-screen bg-slate-100 text-slate-800">
+
+    <main class="max-w-4xl mx-auto px-4 py-8 space-y-6">
+
+        <!-- Título + imprimir -->
+        <header class="flex items-center justify-between">
+            <div>
+                <h1 class="flex items-center gap-2 text-2xl font-bold text-slate-900">
+                    <span class="material-icons text-emerald-500 text-3xl">task_alt</span>
+                    Resumen final del servicio
+                </h1>
+                <p class="text-sm text-slate-500 mt-1">
+                    Orden de trabajo #@orden.OrdenId · Estado:
+                    <span class="font-semibold text-emerald-600 uppercase">@orden.Estado</span>
+                </p>
+            </div>
+
+            <div class="flex gap-2">
+                <!-- Imprimir en navegador -->
+                <button type="button"
+                        onclick="window.print()"
+                        class="inline-flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-medium
+                       bg-slate-200 text-slate-900 hover:bg-slate-300 shadow">
+                    <span class="material-icons text-base">print</span>
+                    Imprimir
+                </button>
+
+                <!-- Exportar a PDF -->
+                <a asp-action="ExportarPdf"
+                   asp-route-id="@orden.OrdenId"
+                   class="inline-flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-medium
+                  bg-slate-900 text-white hover:bg-slate-800 shadow"
+                   target="_blank">
+                    <span class="material-icons text-base">picture_as_pdf</span>
+                    Exportar PDF
+                </a>
+            </div>
+        </header>
+
+        <!-- Resumen principal -->
+        <section class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 space-y-4">
+            <h2 class="flex items-center gap-2 text-base font-semibold text-slate-800 mb-2">
+                <span class="material-icons text-indigo-500">description</span>
+                Resumen del servicio
+            </h2>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
+                <!-- Cliente -->
+                <div>
+                    <p class="text-xs text-slate-500">Cliente</p>
+                    <p class="font-medium">
+                        @(string.IsNullOrWhiteSpace(orden.ClienteNombreCompleto)
+                                                ? "Cliente no disponible"
+                                                : orden.ClienteNombreCompleto)
+                    </p>
+                </div>
+
+                <!-- Vehículo -->
+                <div>
+                    <p class="text-xs text-slate-500">Vehículo</p>
+                    <p class="font-medium">
+                        @{
+                            var vehDesc = string.IsNullOrWhiteSpace(orden.VehiculoDescripcion)
+                            ? $"Vehículo ID: {orden.VehiculoId}"
+                            : orden.VehiculoDescripcion;
+                        }
+                        @vehDesc
+                        @if (!string.IsNullOrWhiteSpace(orden.VehiculoPlaca))
+                        {
+                            <span class="text-slate-500 text-xs"> · Placa: @orden.VehiculoPlaca</span>
+                        }
+                    </p>
+                </div>
+
+                <!-- Mecánico -->
+                <div>
+                    <p class="text-xs text-slate-500">Mecánico asignado</p>
+                    <p class="font-medium">
+                        @(string.IsNullOrWhiteSpace(orden.MecanicoNombreCompleto)
+                                                ? "No asignado"
+                                                : orden.MecanicoNombreCompleto)
+                    </p>
+                </div>
+
+                <!-- Fecha final / creación -->
+                <div>
+                    <p class="text-xs text-slate-500">Fecha de finalización</p>
+                    <p class="font-medium">
+                        @orden.Fecha.ToString("dd/MM/yyyy HH:mm")
+                    </p>
+                </div>
+
+                <!-- Observaciones -->
+                <div class="md:col-span-2">
+                    <p class="text-xs text-slate-500">Observaciones</p>
+                    <p class="text-sm bg-slate-50 rounded-xl px-3 py-2 border border-slate-200">
+                        @(string.IsNullOrWhiteSpace(orden.Observaciones)
+                                                ? "Sin observaciones adicionales."
+                                                : orden.Observaciones)
+                    </p>
+                </div>
+
+                <!-- Total -->
+                <div>
+                    <p class="text-xs text-slate-500">Total del servicio</p>
+                    <p class="text-xl font-bold text-emerald-600">
+                        @orden.Total.ToString("C")
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Lista de servicios realizados -->
+        <section class="bg-white rounded-2xl shadow-sm border border-slate-200">
+            <div class="px-6 py-4 border-b border-slate-100 flex items-center justify-between">
+                <h2 class="flex items-center gap-2 text-base font-semibold text-slate-800">
+                    <span class="material-icons text-amber-500">home_repair_service</span>
+                    Servicios realizados
+                </h2>
+                <span class="text-xs text-slate-500">
+                    @detalles.Count servicio(s)
+                </span>
+            </div>
+
+            @if (!detalles.Any())
+            {
+                <div class="p-6 text-sm text-slate-500">
+                    <em>No hay servicios registrados en esta orden.</em>
+                </div>
+            }
+            else
+            {
+                <div class="overflow-x-auto">
+                    <table class="min-w-full text-sm">
+                        <thead class="bg-slate-50 text-slate-500 border-b border-slate-200">
+                            <tr>
+                                <th class="text-left font-medium px-4 py-2">Servicio</th>
+                                <th class="text-right font-medium px-4 py-2">Cantidad</th>
+                                <th class="text-right font-medium px-4 py-2">Precio</th>
+                                <th class="text-right font-medium px-4 py-2">Subtotal</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-slate-100">
+                            @foreach (var d in detalles)
+                            {
+                                <tr class="hover:bg-slate-50">
+                                    <td class="px-4 py-2">
+                                        <div class="flex items-center gap-2">
+                                            <span class="material-icons text-slate-400 text-base">
+                                                check_circle
+                                            </span>
+                                            <span class="font-medium text-slate-800">
+                                                @d.ServicioNombre
+                                            </span>
+                                        </div>
+                                    </td>
+                                    <td class="px-4 py-2 text-right">@d.Cantidad</td>
+                                    <td class="px-4 py-2 text-right">@d.Precio.ToString("C")</td>
+                                    <td class="px-4 py-2 text-right font-medium">
+                                        @d.Subtotal.ToString("C")
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                        <tfoot class="bg-slate-50 border-t border-slate-200">
+                            <tr>
+                                <th colspan="3" class="text-right px-4 py-3 text-sm font-semibold text-slate-700">
+                                    Total
+                                </th>
+                                <th class="text-right px-4 py-3 text-lg font-bold text-emerald-600">
+                                    @orden.Total.ToString("C")
+                                </th>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            }
+        </section>
+
+        <!-- Botón volver -->
+        <section class="flex justify-end">
+            <a asp-action="Index"
+               class="inline-flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-medium
+                      bg-slate-800 text-white hover:bg-slate-900 transition">
+                <span class="material-icons text-base">arrow_back</span>
+                Volver al listado de órdenes
+            </a>
+        </section>
+
+    </main>
+
+    @* SweetAlert al llegar al resumen final *@
+    @if (TempData["MostrarAlertaFinal"] != null)
+    {
+        <script>
+            Swal.fire({
+                title: 'Orden finalizada',
+                text: 'La orden ha sido marcada como ENTREGADA al cliente y el servicio ha quedado registrado.',
+                icon: 'success',
+                confirmButtonText: 'Ver resumen',
+                confirmButtonColor: '#0f766e',
+                background: '#ffffff',
+                color: '#0f172a'
+            });
+        </script>
+    }
+
+</body>
+</html>

@@ -1,0 +1,127 @@
+﻿@{
+    ViewData["Title"] = "Menú de Órdenes de Trabajo";
+}
+
+<!-- TAILWIND -->
+<script src="https://cdn.tailwindcss.com"></script>
+
+<!-- MATERIAL ICONS -->
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+<div class="min-h-[80vh] bg-slate-950 flex items-center justify-center py-10">
+    <div class="w-full max-w-5xl px-4">
+        <!-- Título -->
+        <div class="flex items-center justify-between mb-8">
+            <div>
+                <h2 class="text-3xl md:text-4xl font-semibold text-slate-50 mb-2 flex items-center gap-2">
+                    <span class="material-icons text-amber-400 text-4xl">
+                        assignment
+                    </span>
+                    Menú de Órdenes de Trabajo
+                </h2>
+                <p class="text-slate-400 text-sm md:text-base">
+                    Gestiona las órdenes generadas desde el carrito: consulta, detalle, estado y seguimiento general del taller.
+                </p>
+            </div>
+
+            <!-- Volver al menú principal -->
+            <div>
+                <a asp-controller="Home" asp-action="MenuPrincipal"
+                   class="inline-flex items-center gap-1 px-4 py-2 rounded-full text-sm font-medium bg-slate-800 hover:bg-slate-700 text-slate-100 border border-slate-700 transition-colors">
+                    <span class="material-icons text-base">
+                        arrow_back
+                    </span>
+                    Volver al menú principal
+                </a>
+            </div>
+        </div>
+
+        <!-- Grid de opciones -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+
+            <!-- Listar órdenes -->
+            <div class="group bg-slate-900/70 border border-slate-800 rounded-2xl p-5 shadow-lg shadow-slate-900/40 hover:shadow-xl hover:-translate-y-1 transition-all duration-200">
+                <div class="flex items-center gap-2 mb-3">
+                    <span class="material-icons text-indigo-400 text-3xl">
+                        list_alt
+                    </span>
+                    <h3 class="text-slate-50 font-semibold text-lg">
+                        Listar órdenes
+                    </h3>
+                </div>
+                <p class="text-slate-400 text-sm mb-4">
+                    Revisa el listado completo de órdenes de trabajo generadas, con su total y estado actual.
+                </p>
+                <a asp-controller="OrdenTrabajo" asp-action="Index"
+                   class="inline-flex items-center gap-1 text-sm font-medium px-3 py-2 rounded-full bg-indigo-500 hover:bg-indigo-400 text-white transition-colors">
+                    Ir al listado
+                    <span class="material-icons text-base">
+                        arrow_forward
+                    </span>
+                </a>
+            </div>
+
+            <!-- Ir al módulo Carrito para generar nuevas órdenes -->
+            <div class="group bg-slate-900/70 border border-slate-800 rounded-2xl p-5 shadow-lg shadow-slate-900/40 hover:shadow-xl hover:-translate-y-1 transition-all duration-200">
+                <div class="flex items-center gap-2 mb-3">
+                    <span class="material-icons text-emerald-400 text-3xl">
+                        shopping_cart
+                    </span>
+                    <h3 class="text-slate-50 font-semibold text-lg">
+                        Generar nuevas órdenes
+                    </h3>
+                </div>
+                <p class="text-slate-400 text-sm mb-4">
+                    Para crear una nueva orden, primero arma el carrito de servicios por vehículo y confirma la generación de la orden.
+                </p>
+                <a asp-controller="Carrito" asp-action="MenuCarrito"
+                   class="inline-flex items-center gap-1 text-sm font-medium px-3 py-2 rounded-full bg-emerald-500 hover:bg-emerald-400 text-white transition-colors">
+                    Ir al módulo Carrito
+                    <span class="material-icons text-base">
+                        arrow_forward
+                    </span>
+                </a>
+            </div>
+
+            <!-- Búsqueda / reportes -->
+            <div class="group bg-slate-900/70 border border-slate-800 rounded-2xl p-5 shadow-lg shadow-slate-900/40 hover:shadow-xl hover:-translate-y-1 transition-all duration-200">
+                <div class="flex items-center gap-2 mb-3">
+                    <span class="material-icons text-amber-400 text-3xl">
+                        analytics
+                    </span>
+                    <h3 class="text-slate-50 font-semibold text-lg">
+                        Buscar / reportes
+                    </h3>
+                </div>
+                <p class="text-slate-400 text-sm mb-4">
+                    Desde el listado o un módulo de reportes puedes filtrar órdenes por rango de fechas,
+                    estado o mecánico (según lo que implementes).
+                </p>
+                <a asp-controller="OrdenTrabajo" asp-action="ReportesOrdenTrabajo"
+                   class="inline-flex items-center gap-1 text-sm font-medium px-3 py-2 rounded-full bg-amber-500 hover:bg-amber-400 text-white transition-colors">
+                    Ver reportes
+                    <span class="material-icons text-base">
+                        insights
+                    </span>
+                </a>
+            </div>
+
+        </div>
+
+        <!-- Sección informativa -->
+        <div class="mt-10 bg-slate-900/60 border border-slate-800 rounded-2xl p-5">
+            <h4 class="text-slate-100 font-semibold mb-3 flex items-center gap-2 text-base md:text-lg">
+                <span class="material-icons text-sky-400">
+                    info
+                </span>
+                Acciones disponibles en órdenes de trabajo
+            </h4>
+            <ul class="list-disc list-inside text-slate-400 text-sm space-y-1">
+                <li><span class="font-medium text-slate-200">Consultar:</span> ver el detalle de los servicios realizados y montos cobrados.</li>
+                <li><span class="font-medium text-slate-200">Actualizar estado:</span> marcar una orden como pendiente, en proceso, terminada o entregada.</li>
+                <li><span class="font-medium text-slate-200">Relacionar:</span> ver qué vehículo, cliente y mecánico están asociados a cada orden.</li>
+                <li><span class="font-medium text-slate-200">Reportes:</span> obtener información resumida por fechas o por mecánico para análisis del taller.</li>
+            </ul>
+        </div>
+    </div>
+</div>

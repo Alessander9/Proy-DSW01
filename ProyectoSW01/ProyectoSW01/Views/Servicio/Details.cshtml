@@ -1,0 +1,89 @@
+﻿@model ProyectoSW01.Models.Servicio
+
+@{
+    ViewData["Title"] = "Detalle Servicio";
+}
+
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
+
+<div class="mb-8 flex items-center gap-3">
+    <span class="material-icons-round text-3xl text-blue-600">info</span>
+    <div>
+        <h1 class="text-3xl font-bold text-gray-800">Detalle del servicio</h1>
+        <p class="text-gray-500 text-sm mt-1">Información completa del servicio seleccionado.</p>
+    </div>
+</div>
+
+<div class="bg-white rounded-2xl shadow-xl p-8 max-w-3xl">
+    <dl class="grid grid-cols-1 md:grid-cols-2 gap-6 text-sm">
+
+        <div>
+            <dt class="flex items-center gap-2 text-gray-500 uppercase text-xs font-semibold mb-1">
+                <span class="material-icons-round text-base">tag</span>
+                ID
+            </dt>
+            <dd class="text-gray-800 font-bold">@Model.ServicioId</dd>
+        </div>
+
+        <div>
+            <dt class="flex items-center gap-2 text-gray-500 uppercase text-xs font-semibold mb-1">
+                <span class="material-icons-round text-base">build_circle</span>
+                Nombre
+            </dt>
+            <dd class="text-gray-800 font-bold">@Model.Nombre</dd>
+        </div>
+
+        <div>
+            <dt class="flex items-center gap-2 text-gray-500 uppercase text-xs font-semibold mb-1">
+                <span class="material-icons-round text-base">category</span>
+                Categoría
+            </dt>
+            <dd class="text-gray-800">@Model.Categoria</dd>
+        </div>
+
+        <div>
+            <dt class="flex items-center gap-2 text-gray-500 uppercase text-xs font-semibold mb-1">
+                <span class="material-icons-round text-base">payments</span>
+                Precio base
+            </dt>
+            <dd class="text-green-700 font-semibold">
+                S/ @Model.PrecioBase.ToString("0.00")
+            </dd>
+        </div>
+
+        <div>
+            <dt class="flex items-center gap-2 text-gray-500 uppercase text-xs font-semibold mb-1">
+                <span class="material-icons-round text-base">schedule</span>
+                Tiempo estimado (horas)
+            </dt>
+            <dd>
+                @(Model.TiempoEstimadoHoras.HasValue? Model.TiempoEstimadoHoras.Value.ToString("0.0") : "-")
+            </dd>
+        </div>
+
+        <div class="md:col-span-2">
+            <dt class="flex items-center gap-2 text-gray-500 uppercase text-xs font-semibold mb-1">
+                <span class="material-icons-round text-base">description</span>
+                Descripción
+            </dt>
+            <dd class="text-gray-800">
+                @(string.IsNullOrWhiteSpace(Model.Descripcion) ? "Sin descripción registrada." : Model.Descripcion)
+            </dd>
+        </div>
+    </dl>
+
+    <div class="mt-8 flex gap-3">
+        <a asp-action="ListarServicios"
+           class="inline-flex items-center gap-2 px-4 py-2 rounded-xl border border-gray-300 text-sm text-gray-700 hover:bg-gray-100">
+            <span class="material-icons-round text-base">arrow_back</span>
+            Volver
+        </a>
+
+        <a asp-action="Edit" asp-route-id="@Model.ServicioId"
+           class="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-amber-500 text-white text-sm font-semibold hover:bg-amber-600">
+            <span class="material-icons-round text-base text-white">edit</span>
+            Editar
+        </a>
+    </div>
+</div>
