@@ -1,0 +1,102 @@
+﻿@model ProyectoSW01.Models.Vehiculo
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8" />
+    <title>Eliminar vehículo</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+</head>
+<body class="bg-gray-100">
+
+    <div class="max-w-3xl mx-auto px-4 py-6">
+        <h1 class="text-2xl font-bold text-red-700 mb-6 flex items-center gap-2">
+            <span class="material-icons text-red-700">delete_forever</span>
+            Eliminar vehículo
+        </h1>
+
+        <div class="bg-white rounded-xl shadow p-6 border border-red-100">
+            <p class="mb-4 text-sm text-gray-700 flex items-center gap-2">
+                <span class="material-icons text-red-600">warning</span>
+                ¿Estás seguro que deseas eliminar este vehículo? Esta acción no se puede deshacer.
+            </p>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6 text-sm">
+                <div>
+                    <p class="text-xs text-blue-900 flex items-center gap-1">
+                        <span class="material-icons text-sm">tag</span>ID
+                    </p>
+                    <p class="font-semibold text-gray-800">@Model.VehiculoId</p>
+                </div>
+
+                <div>
+                    <p class="text-xs text-blue-900 flex items-center gap-1">
+                        <span class="material-icons text-sm">person</span>Cliente
+                    </p>
+                    <p class="font-semibold text-gray-800">
+                        @(Model.ClienteNombreCompleto ?? "N/D")
+                    </p>
+                </div>
+
+                <div>
+                    <p class="text-xs text-blue-900 flex items-center gap-1">
+                        <span class="material-icons text-sm">drive_eta</span>Marca / Modelo
+                    </p>
+                    <p class="font-semibold text-gray-800">
+                        @($"{Model.Marca} {Model.Modelo}")
+                    </p>
+                </div>
+
+                <div>
+                    <p class="text-xs text-blue-900 flex items-center gap-1">
+                        <span class="material-icons text-sm">event</span>Año
+                    </p>
+                    <p class="font-semibold text-gray-800">@Model.Anio</p>
+                </div>
+
+                <div>
+                    <p class="text-xs text-blue-900 flex items-center gap-1">
+                        <span class="material-icons text-sm">confirmation_number</span>Placa
+                    </p>
+                    <p class="font-semibold text-gray-800">@Model.Placa</p>
+                </div>
+
+                <div>
+                    <p class="text-xs text-blue-900 flex items-center gap-1">
+                        <span class="material-icons text-sm">qr_code_2</span>VIN
+                    </p>
+                    <p class="font-semibold text-gray-800">
+                        @(Model.Vin ?? "Sin VIN")
+                    </p>
+                </div>
+            </div>
+
+            <form asp-action="Delete" method="post">
+                @Html.AntiForgeryToken()
+                <input type="hidden" asp-for="VehiculoId" />
+
+                <div class="flex items-center justify-end gap-3">
+                    <a asp-action="ListarVehiculos"
+                       class="inline-flex items-center px-4 py-2 rounded-lg border border-blue-900 text-blue-900 text-sm hover:bg-blue-900 hover:text-white transition">
+                        <span class="material-icons text-sm mr-1">arrow_back</span>
+                        Cancelar
+                    </a>
+
+                    <button type="submit"
+                            class="inline-flex items-center px-4 py-2 rounded-lg bg-red-600 text-white text-sm font-semibold hover:bg-red-700 transition">
+                        <span class="material-icons text-sm mr-1">delete</span>
+                        Eliminar
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+</body>
+</html>

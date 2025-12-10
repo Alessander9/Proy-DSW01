@@ -1,0 +1,116 @@
+﻿@model ProyectoSW01.Models.Servicio
+
+@{
+    ViewData["Title"] = "Editar Servicio";
+}
+
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
+
+<!-- CONTENEDOR GENERAL CENTRADO -->
+<div class="min-h-screen flex flex-col items-center justify-center px-4 bg-gray-100">
+
+    <!-- TÍTULO CENTRADO -->
+    <div class="mb-8 text-center">
+        <h1 class="text-3xl font-bold text-gray-800">Editar servicio</h1>
+        <p class="text-gray-500 mt-1 text-sm">
+            Actualiza la información del servicio seleccionado.
+        </p>
+    </div>
+
+    <!-- TARJETA DEL FORMULARIO CENTRADA -->
+    <div class="w-full max-w-4xl bg-white shadow-xl rounded-2xl p-8">
+        <form asp-action="Edit" method="post" class="space-y-6">
+
+            <div asp-validation-summary="ModelOnly" class="text-red-500 text-sm mb-2 text-center"></div>
+
+            <input type="hidden" asp-for="ServicioId" />
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+                <!-- Nombre -->
+                <div class="space-y-1 text-left">
+                    <label asp-for="Nombre" class="flex items-center gap-2 text-sm font-semibold text-gray-700">
+                        <span class="material-icons-round text-blue-600 text-base">build_circle</span>
+                        @Html.DisplayNameFor(m => m.Nombre)
+                    </label>
+                    <input asp-for="Nombre"
+                           class="w-full px-4 py-2.5 rounded-xl border border-gray-300 bg-gray-50
+                                  text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:bg-white" />
+                    <span asp-validation-for="Nombre" class="text-red-500 text-xs"></span>
+                </div>
+
+                <!-- Categoría -->
+                <div class="space-y-1 text-left">
+                    <label asp-for="Categoria" class="flex items-center gap-2 text-sm font-semibold text-gray-700">
+                        <span class="material-icons-round text-blue-600 text-base">category</span>
+                        @Html.DisplayNameFor(m => m.Categoria)
+                    </label>
+                    <input asp-for="Categoria"
+                           class="w-full px-4 py-2.5 rounded-xl border border-gray-300 bg-gray-50
+                                  text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:bg-white" />
+                    <span asp-validation-for="Categoria" class="text-red-500 text-xs"></span>
+                </div>
+
+                <!-- Precio base -->
+                <div class="space-y-1 text-left">
+                    <label asp-for="PrecioBase" class="flex items-center gap-2 text-sm font-semibold text-gray-700">
+                        <span class="material-icons-round text-blue-600 text-base">payments</span>
+                        @Html.DisplayNameFor(m => m.PrecioBase)
+                    </label>
+                    <input asp-for="PrecioBase"
+                           class="w-full px-4 py-2.5 rounded-xl border border-gray-300 bg-gray-50
+                                  text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:bg-white" />
+                    <span asp-validation-for="PrecioBase" class="text-red-500 text-xs"></span>
+                </div>
+
+                <!-- Tiempo estimado -->
+                <div class="space-y-1 text-left">
+                    <label asp-for="TiempoEstimadoHoras" class="flex items-center gap-2 text-sm font-semibold text-gray-700">
+                        <span class="material-icons-round text-blue-600 text-base">schedule</span>
+                        @Html.DisplayNameFor(m => m.TiempoEstimadoHoras)
+                    </label>
+                    <input asp-for="TiempoEstimadoHoras"
+                           class="w-full px-4 py-2.5 rounded-xl border border-gray-300 bg-gray-50
+                                  text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:bg-white" />
+                    <span asp-validation-for="TiempoEstimadoHoras" class="text-red-500 text-xs"></span>
+                </div>
+
+            </div>
+
+            <!-- Descripción -->
+            <div class="space-y-1 text-left">
+                <label asp-for="Descripcion" class="flex items-center gap-2 text-sm font-semibold text-gray-700">
+                    <span class="material-icons-round text-blue-600 text-base">description</span>
+                    @Html.DisplayNameFor(m => m.Descripcion)
+                </label>
+                <textarea asp-for="Descripcion" rows="4"
+                          class="w-full px-4 py-2.5 rounded-xl border border-gray-300 bg-gray-50
+                                 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:bg-white"></textarea>
+                <span asp-validation-for="Descripcion" class="text-red-500 text-xs"></span>
+            </div>
+
+            <!-- BOTONES CENTRADOS -->
+            <div class="flex justify-center gap-4 pt-6">
+                <a asp-action="ListarServicios"
+                   class="px-5 py-2 rounded-xl border border-gray-300 text-sm text-gray-700 hover:bg-gray-100 flex items-center gap-2">
+                    <span class="material-icons-round text-base">arrow_back</span>
+                    Volver
+                </a>
+
+                <button type="submit"
+                        class="px-6 py-2.5 rounded-xl bg-green-600 text-white text-sm font-semibold flex items-center gap-2 hover:bg-green-700 shadow-md">
+                    <span class="material-icons-round text-base text-white">save</span>
+                    Guardar cambios
+                </button>
+            </div>
+
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

@@ -1,0 +1,118 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8" />
+    <title>Menú del Carrito y Órdenes</title>
+
+    <!-- Tailwind CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Material Icons -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+</head>
+
+<body class="bg-slate-100 min-h-screen text-slate-800">
+
+    <!-- ENCABEZADO -->
+    <header class="bg-slate-900 text-white py-4 shadow-md">
+        <div class="max-w-5xl mx-auto px-4 flex items-center gap-3">
+            <span class="material-icons text-4xl text-emerald-400">shopping_cart</span>
+            <div>
+                <h1 class="text-xl font-semibold">Módulo de Carrito y Órdenes</h1>
+                <p class="text-xs text-slate-300">Gestión de servicios y creación de órdenes de trabajo</p>
+            </div>
+        </div>
+    </header>
+
+    <!-- CONTENIDO -->
+    <main class="max-w-5xl mx-auto px-4 py-8 space-y-8">
+
+        <!-- BOTÓN VOLVER AL MENÚ PRINCIPAL -->
+        <div>
+            <a asp-controller="OrdenTrabajo" asp-action="MenuOrdenDeTrabajo"
+               class="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-slate-800 text-white text-sm hover:bg-slate-900 transition">
+                <span class="material-icons text-base">home</span>
+                Regresar
+            </a>
+        </div>
+
+        <!-- TARJETA PRINCIPAL -->
+        <section class="bg-white rounded-2xl shadow border border-slate-200 p-6">
+            <h2 class="text-lg font-semibold flex items-center gap-2 mb-4">
+                <span class="material-icons text-indigo-500">directions_car</span>
+                Seleccionar flujo de trabajo
+            </h2>
+
+            <p class="text-sm text-slate-600 mb-6">
+                Desde este módulo podrás gestionar los servicios del carrito por vehículo,
+                así como generar y revisar órdenes de trabajo.
+            </p>
+
+            <!-- OPCIONES -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+                <!-- OPCIÓN 1: INICIAR CARRITO POR VEHÍCULO -->
+                <div class="p-5 bg-slate-50 border border-slate-200 rounded-xl shadow-sm hover:shadow transition">
+                    <h3 class="font-semibold flex items-center gap-2 mb-2">
+                        <span class="material-icons text-emerald-500">build</span>
+                        Iniciar Carrito por Vehículo
+                    </h3>
+
+                    <p class="text-sm text-slate-600 mb-4">
+                        Seleccione un vehículo para agregar servicios y generar una orden de trabajo.
+                    </p>
+
+                    <a asp-controller="Vehiculo" asp-action="BuscarVehiculos"
+                       class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-emerald-600 text-white text-sm hover:bg-emerald-700 transition">
+                        <span class="material-icons text-base">search</span>
+                        Buscar vehículo
+                    </a>
+                </div>
+
+                <!-- OPCIÓN 2: VER ÓRDENES DE TRABAJO -->
+                <div class="p-5 bg-slate-50 border border-slate-200 rounded-xl shadow-sm hover:shadow transition">
+                    <h3 class="font-semibold flex items-center gap-2 mb-2">
+                        <span class="material-icons text-blue-600">assignment</span>
+                        Órdenes de Trabajo
+                    </h3>
+
+                    <p class="text-sm text-slate-600 mb-4">
+                        Consulta, revisa y gestiona las órdenes generadas en el taller.
+                    </p>
+
+                    <a asp-controller="OrdenTrabajo" asp-action="Index"
+                       class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-blue-600 text-white text-sm hover:bg-blue-700 transition">
+                        <span class="material-icons text-base">list</span>
+                        Ver órdenes
+                    </a>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- SUGERENCIA DE FLUJO -->
+        <section class="bg-white rounded-2xl shadow border border-slate-200 p-6">
+            <h2 class="text-lg font-semibold flex items-center gap-2 mb-3">
+                <span class="material-icons text-purple-500">timeline</span>
+                Flujo recomendado
+            </h2>
+
+            <ol class="list-decimal pl-6 text-sm text-slate-700 space-y-2">
+                <li>Buscar un vehículo y abrir su carrito.</li>
+                <li>Agregar servicios y cantidades.</li>
+                <li>Seleccionar un mecánico y generar la orden de trabajo.</li>
+                <li>Revisar los detalles de la orden creada.</li>
+                <li>Consultar el historial desde el panel de Órdenes.</li>
+            </ol>
+        </section>
+
+    </main>
+
+</body>
+</html>

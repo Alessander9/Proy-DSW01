@@ -1,0 +1,51 @@
+﻿@model ProyectoSW01.Models.Diagnostico
+
+@{
+    ViewData["Title"] = "Eliminar diagnóstico";
+}
+
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
+
+<div class="max-w-xl mx-auto bg-white rounded-2xl shadow-xl p-8 mt-6">
+    <div class="flex items-center gap-3 mb-4">
+        <span class="material-icons-round text-red-600 text-3xl">warning</span>
+        <div>
+            <h1 class="text-2xl font-bold text-gray-800">Eliminar diagnóstico</h1>
+            <p class="text-gray-500 text-sm">¿Estás seguro de que deseas eliminar este registro?</p>
+        </div>
+    </div>
+
+    <dl class="grid grid-cols-1 gap-3 text-sm bg-red-50 border border-red-100 rounded-xl p-4 mb-6">
+        <div>
+            <dt class="font-semibold text-gray-700">ID</dt>
+            <dd>@Model.DiagnosticoId</dd>
+        </div>
+        <div>
+            <dt class="font-semibold text-gray-700">Vehículo</dt>
+            <dd>@Model.VehiculoId</dd>
+        </div>
+        <div>
+            <dt class="font-semibold text-gray-700">Mecánico</dt>
+            <dd>@Model.MecanicoId</dd>
+        </div>
+        <div>
+            <dt class="font-semibold text-gray-700">Estado</dt>
+            <dd>@Model.Estado</dd>
+        </div>
+    </dl>
+
+    <form asp-action="Delete" method="post" class="flex items-center justify-end gap-3">
+        <input type="hidden" asp-for="DiagnosticoId" />
+        <a asp-action="ListarDiagnosticos"
+           class="px-5 py-2.5 rounded-xl border border-gray-300 text-sm text-gray-700 hover:bg-gray-100 inline-flex items-center gap-2">
+            <span class="material-icons-round text-base">arrow_back</span>
+            Cancelar
+        </a>
+        <button type="submit"
+                class="px-6 py-2.5 rounded-xl bg-red-600 text-white text-sm font-semibold inline-flex items-center gap-2 hover:bg-red-700">
+            <span class="material-icons-round text-base text-white">delete</span>
+            Eliminar
+        </button>
+    </form>
+</div>

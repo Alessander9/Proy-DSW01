@@ -1,0 +1,14 @@
+# Carpetas de Visual Studio
+.vs/
+
+# Compilados
+bin/
+obj/
+**/bin/
+**/obj/
+
+# Archivos de usuario de VS
+*.user
+*.suo
+*.userosscache
+*.sln.docstates

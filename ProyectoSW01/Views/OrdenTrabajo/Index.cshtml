@@ -1,0 +1,148 @@
+﻿@model IEnumerable<ProyectoSW01.Models.OrdenTrabajo>
+
+@{
+    ViewData["Title"] = "Órdenes de trabajo";
+}
+
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com"></script>
+
+<!-- Material Icons -->
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+
+<!-- jQuery (para DataTables 2.x) -->
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+<!-- DataTables 2.x -->
+<link rel="stylesheet"
+      href="https://cdn.datatables.net/2.1.3/css/dataTables.dataTables.min.css" />
+<script src="https://cdn.datatables.net/2.1.3/js/dataTables.min.js"></script>
+
+<div class="max-w-6xl mx-auto px-4 py-8">
+
+    <!-- Título -->
+    <div class="flex items-center justify-between mb-6">
+        <h1 class="text-3xl font-bold text-gray-800 flex items-center gap-2">
+            <span class="material-icons text-blue-700">assignment_turned_in</span>
+            Órdenes de trabajo
+        </h1>
+
+        @* Si luego quieres un botón de crear manual, lo activas aquí *@
+        @*<a asp-action="Create"
+           class="inline-flex items-center px-4 py-2 bg-blue-700 text-white rounded-lg text-sm hover:bg-blue-800 transition">
+            <span class="material-icons text-sm mr-1">add</span>
+            Nueva orden
+        </a>*@
+    </div>
+
+    <!-- Buscador personalizado -->
+    <div class="flex justify-center mb-6">
+        <div class="w-full max-w-md relative">
+            <input id="tablaBuscador"
+                   type="text"
+                   placeholder="Buscar orden por estado, fecha, vehículo, etc..."
+                   class="w-full px-4 py-2 pl-10 border border-gray-300 rounded-xl shadow-sm
+                          focus:ring-2 focus:ring-blue-400 focus:border-blue-400 outline-none" />
+            <span class="material-icons absolute left-2 top-2.5 text-gray-400">
+                search
+            </span>
+        </div>
+    </div>
+
+    @if (!Model.Any())
+    {
+        <div class="bg-blue-50 border border-blue-100 text-blue-900 px-4 py-3 rounded-lg flex items-center gap-2">
+            <span class="material-icons">info</span>
+            <span>No hay órdenes de trabajo registradas.</span>
+        </div>
+    }
+    else
+    {
+        <!-- Tabla -->
+        <div class="bg-white shadow rounded-xl overflow-x-auto">
+            <table id="ordenesTable" class="min-w-full divide-y divide-gray-200 text-sm display">
+                <thead class="bg-blue-700 text-white">
+                    <tr>
+                        <th class="px-4 py-3 text-left font-semibold"># Orden</th>
+                        <th class="px-4 py-3 text-left font-semibold">Fecha</th>
+                        <th class="px-4 py-3 text-left font-semibold">Vehículo ID</th>
+                        <th class="px-4 py-3 text-left font-semibold">Diagnóstico ID</th>
+                        <th class="px-4 py-3 text-left font-semibold">Mecánico ID</th>
+                        <th class="px-4 py-3 text-left font-semibold">Estado</th>
+                        <th class="px-4 py-3 text-left font-semibold">Total</th>
+                        <th class="px-4 py-3 text-right font-semibold">Acciones</th>
+                    </tr>
+                </thead>
+                <tbody class="divide-y divide-gray-200">
+                    @foreach (var item in Model)
+                    {
+                        <tr class="hover:bg-gray-50">
+                            <td class="px-4 py-3 font-semibold">@item.OrdenId</td>
+                            <td class="px-4 py-3">@item.Fecha.ToString("dd/MM/yyyy HH:mm")</td>
+                            <td class="px-4 py-3">@item.VehiculoId</td>
+                            <td class="px-4 py-3">
+                                @(item.DiagnosticoId.HasValue? item.DiagnosticoId.ToString() : "-")
+                            </td>
+                            <td class="px-4 py-3">
+                                @(item.MecanicoId.HasValue? item.MecanicoId.ToString() : "-")
+                            </td>
+                            <td class="px-4 py-3">
+                                <span class="inline-flex items-center px-2 py-1 rounded-full text-xs
+                                                               @(item.Estado == "pendiente" ? "bg-yellow-100 text-yellow-800" :
+                                                                                                                             item.Estado == "en_proceso" ? "bg-blue-100 text-blue-800" :
+                                                                                                                             item.Estado == "terminado" ? "bg-green-100 text-green-800" :
+                                                                                                                             item.Estado == "entregado" ? "bg-emerald-100 text-emerald-800" :
+                                                                                                                                                             "bg-gray-100 text-gray-800")">
+                            <span class="material-icons text-xs mr-1">flag</span>
+                            @item.Estado
+                        </span>
+                    </td>
+                    <td class="px-4 py-3">@item.Total.ToString("C")</td>
+                    <td class="px-4 py-3 text-right">
+                        <div class="flex justify-end gap-2">
+                            <a asp-action="Details" asp-route-id="@item.OrdenId"
+                               class="text-blue-600 hover:text-blue-800 transition" title="Detalle">
+                                <span class="material-icons text-base">visibility</span>
+                            </a>
+                            @* Aquí podrías agregar acciones para cambiar estado, imprimir, etc. *@
+                        </div>
+                    </td>
+                </tr>
+                                }
+                </tbody>
+            </table>
+        </div>
+    }
+
+    <!-- Botón menú órdenes (abajo) -->
+    <div class="mt-6 flex justify-center">
+        <a asp-action="MenuOrdenDeTrabajo"
+           class="inline-flex items-center gap-2 bg-slate-800 text-white px-5 py-2 rounded-xl
+                  hover:bg-slate-700 shadow-md text-sm">
+            <span class="material-icons text-base">arrow_back</span>
+            Menú de Órdenes de Trabajo
+        </a>
+    </div>
+</div>
+
+<script>
+    let table;
+
+    $(document).ready(function () {
+
+        // Inicializar DataTables 2.x en la tabla de órdenes
+        table = new DataTable('#ordenesTable', {
+            language: {
+                url: 'https://cdn.datatables.net/plug-ins/2.1.3/i18n/es-ES.json'
+            },
+            pageLength: 10,
+            lengthMenu: [5, 10, 25, 50, 100],
+            order: [[0, 'desc']]
+        });
+
+        // Buscador personalizado en tiempo real
+        $('#tablaBuscador').on('input', function () {
+            table.search(this.value).draw();
+        });
+    });
+</script>
